@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navagation"
+    app:startDestination="@id/splashscreenFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.graduationproject.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_bottomNavagation2"
+            app:destination="@id/bottomNavagation2" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashscreenFragment"
+        android:name="com.example.graduationproject.SplashscreenFragment"
+        android:label="fragment_splashscreen"
+        tools:layout="@layout/fragment_splashscreen" >
+        <action
+            android:id="@+id/action_splashscreenFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/splashscreenFragment"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
+    <activity
+        android:id="@+id/bottomNavagation2"
+        android:name="com.example.graduationproject.BottomNavagation"
+        android:label="activity_bottom_navagation"
+        tools:layout="@layout/activity_bottom_navagation" />
+</navigation>
