@@ -1,4 +1,4 @@
-package com.example.graduationproject
+package com.example.graduationproject.presentation.splash
 
 import android.os.Bundle
 import android.os.Handler
@@ -9,13 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.example.graduationproject.R
 
-
-private lateinit var navController: NavController
 
 class SplashscreenFragment : Fragment() {
 
-
+    private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         navController = findNavController()
@@ -31,9 +30,10 @@ class SplashscreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val action =SplashscreenFragmentDirections.actionSplashscreenFragmentToLoginFragment()
+
         Handler(Looper.myLooper()!!).postDelayed({
-            navController.navigate(action)
+            findNavController()
+                .navigate(SplashscreenFragmentDirections.actionSplashscreenFragmentToLoginFragment())
         },2000)
     }
 

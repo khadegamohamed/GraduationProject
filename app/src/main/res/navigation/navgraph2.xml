@@ -3,31 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navgraph2"
-    app:startDestination="@id/homeFragment2">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/homeFragment2"
-        android:name="com.example.graduationproject.HomeFragment"
+        android:id="@+id/homeFragment"
+        android:name="com.example.graduationproject.presentation.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/dataFragment2"
-        android:name="com.example.graduationproject.DataFragment"
+        android:id="@+id/dataFragment"
+        android:name="com.example.graduationproject.presentation.learning.DataFragment"
         android:label="fragment_data"
         tools:layout="@layout/fragment_data" />
     <fragment
-        android:id="@+id/profileFragment2"
-        android:name="com.example.graduationproject.ProfileFragment"
+        android:id="@+id/profileFragment"
+        android:name="com.example.graduationproject.presentation.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/serivesFragment2"
-        android:name="com.example.graduationproject.SerivesFragment"
-        android:label="fragment_serives"
-        tools:layout="@layout/fragment_serives" />
+        android:id="@+id/servicesFragment"
+        android:name="com.example.graduationproject.presentation.services.ServicesFragment"
+        android:label="fragment_services"
+        tools:layout="@layout/fragment_services" />
     <fragment
-        android:id="@+id/settingFragment2"
-        android:name="com.example.graduationproject.SettingFragment"
-        android:label="fragment_setting"
-        tools:layout="@layout/fragment_setting" />
+        android:id="@+id/settingsFragment"
+        android:name="com.example.graduationproject.presentation.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+
 </navigation>

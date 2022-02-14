@@ -5,8 +5,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
  android:background="@color/darkgreen"
-    tools:context=".SplashscreenFragment">
+    tools:context=".presentation.splash.SplashscreenFragment">
 
+    <ImageView
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:scaleType="fitXY"
+        android:src="@drawable/circle_arrow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/cap_logo"
+        android:layout_width="147dp"
+        android:layout_height="142dp"
+        android:layout_marginTop="304dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/cap_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/dash"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_4sdp"
+        android:layout_marginBottom="28dp"
+        android:background="@color/orange"
+        app:layout_constraintBottom_toBottomOf="@+id/cap_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/logo_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="I جامعة"
+        android:textColor="@color/orange"
+        android:textSize="@dimen/_20sdp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dash" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

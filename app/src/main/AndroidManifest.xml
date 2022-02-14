@@ -9,14 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GraduationProject">
+
         <activity
-            android:name=".Tablayout"
+            android:name=".presentation.nav_activities.BottomNavigation"
             android:exported="true" />
         <activity
-            android:name=".BottomNavagation"
-            android:exported="true" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".presentation.nav_activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

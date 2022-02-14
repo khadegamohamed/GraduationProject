@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.graduationproject.LoginFragment"
+        android:name="com.example.graduationproject.presentation.auth.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashscreenFragment"
-        android:name="com.example.graduationproject.SplashscreenFragment"
+        android:name="com.example.graduationproject.presentation.splash.SplashscreenFragment"
         android:label="fragment_splashscreen"
         tools:layout="@layout/fragment_splashscreen" >
         <action
@@ -29,7 +29,7 @@
     </fragment>
     <activity
         android:id="@+id/bottomNavagation2"
-        android:name="com.example.graduationproject.BottomNavagation"
+        android:name="com.example.graduationproject.presentation.nav_activities.BottomNavigation"
         android:label="activity_bottom_navagation"
         tools:layout="@layout/activity_bottom_navagation" />
 </navigation>

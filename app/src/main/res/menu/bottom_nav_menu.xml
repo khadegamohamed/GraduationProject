@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Home"
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_home_24"
+        />
+
+    <item
+        android:title="Data"
+        android:id="@+id/dataFragment"
+        android:icon="@drawable/ic_baseline_menu_book_24"
+        />
+    <item
+        android:title=""
+        android:id="@+id/placeholder"
+        />
+    <item
+        android:title="Services"
+        android:id="@+id/servicesFragment"
+        android:icon="@drawable/ic_miscellaneous_services_24"
+        />
+    <item
+        android:title="Settings"
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_baseline_menu_24"
+        />
+
+
+</menu>
