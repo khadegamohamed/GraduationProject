@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_80sdp"
+    app:cardCornerRadius="@dimen/_16sdp"
+    app:cardElevation="@dimen/_10sdp"
+    android:layout_margin="@dimen/_10sdp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/off_white">
+
+        <TextView
+            android:id="@+id/subject_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Subject name"
+            android:textColor="@color/orange"
+            android:textSize="@dimen/_21sdp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/subject_image"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha=".2"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

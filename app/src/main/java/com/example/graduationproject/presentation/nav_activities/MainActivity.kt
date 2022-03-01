@@ -2,6 +2,7 @@ package com.example.graduationproject.presentation.nav_activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.NavHostFragment
 import com.example.graduationproject.R
 import com.example.graduationproject.databinding.ActivityMainBinding

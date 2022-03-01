@@ -52,8 +52,9 @@
         android:layout_marginTop="72dp"
         android:layout_marginRight="@dimen/_20sdp"
         android:hint="@string/user_name"
-        android:textColorHint="#ccc"
+        android:textColorHint="@color/dark_gray"
         android:textSize="@dimen/_12ssp"
+        android:background="@drawable/edit_text_border"
         app:boxBackgroundColor="@color/white"
         app:boxBackgroundMode="filled"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,20 +67,21 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_border"
             android:inputType="textEmailAddress"
-            android:textColor="#ccc"
+            android:textColor="@color/darkgreen"
             android:textSize="@dimen/_12ssp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password_container"
+        android:id="@+id/userCode_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_20sdp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="@dimen/_20sdp"
         android:hint="@string/user_code"
-        android:textColorHint="#ccc"
+        android:textColorHint="@color/dark_gray"
+        android:background="@drawable/edit_text_border"
         android:textSize="@dimen/_12ssp"
         app:boxBackgroundColor="@color/white"
         app:boxBackgroundMode="filled"
@@ -93,7 +95,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_border"
             android:inputType="textEmailAddress"
-            android:textColor="#ccc"
+            android:textColor="@color/darkgreen"
             android:textSize="@dimen/_12ssp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -103,20 +105,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_30sdp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="46dp"
         android:layout_marginEnd="@dimen/_30sdp"
-        android:text="Log In"
-        android:textColor="@color/white"
-        android:drawableEnd="@drawable/ic_arrow_circle_right_24"
-        android:textAllCaps="false"
-        app:backgroundTint="@null"
-        android:paddingEnd="@dimen/_15sdp"
         android:background="@drawable/login_btn_background"
+        android:drawableEnd="@drawable/ic_arrow_circle_right_24"
+        android:paddingEnd="@dimen/_15sdp"
+        android:text="LogIn"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         android:textSize="@dimen/_26sdp"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_container"
-        app:layout_constraintVertical_bias="0.12" />
+        app:layout_constraintTop_toBottomOf="@+id/userCode_container"
+        app:layout_constraintVertical_bias="0.079" />
 </androidx.constraintlayout.widget.ConstraintLayout>
