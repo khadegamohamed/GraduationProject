@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/dataFragment"
-        android:name="com.example.graduationproject.presentation.learning.DataFragment"
+        android:name="com.example.graduationproject.presentation.data.view.DataFragment"
         android:label="fragment_data"
         tools:layout="@layout/fragment_data" />
     <fragment
@@ -30,5 +30,27 @@
         android:name="com.example.graduationproject.presentation.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/studyingFragment"
+        android:name="com.example.graduationproject.presentation.studying.StudyingFragment"
+        android:label="fragment_studying"
+        tools:layout="@layout/fragment_studying" >
+
+        <argument
+            android:name="termNumber"
+            app:argType="integer" />
+    </fragment>
+    <action
+        android:id="@+id/action_studyingFragment_to_subjectsFragment"
+        app:destination="@id/subjectsFragment" />
+    <fragment
+        android:id="@+id/subjectsFragment"
+        android:name="com.example.graduationproject.presentation.subjects.view.SubjectsFragment"
+        android:label="fragment_subjects"
+        tools:layout="@layout/fragment_subjects" >
+        <argument
+            android:name="termNumber"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

@@ -5,8 +5,10 @@
       <map>
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.18333333333333332" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/drawable/circle_aerrow.xml" value="0.9928571428571429" />
+        <entry key="..\:/My Projects/GraduationProject/app/src/main/res/drawable/dradient_background.xml" value="0.2546875" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/drawable/edit_text_border.xml" value="0.26666666666666666" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/drawable/editsearch.xml" value="0.26666666666666666" />
+        <entry key="..\:/My Projects/GraduationProject/app/src/main/res/drawable/gradient_background.xml" value="0.2703125" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/drawable/ic_arrow_circle_right_24.xml" value="0.26666666666666666" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.26666666666666666" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/drawable/ic_baseline_keyboard_arrow_right_24.xml" value="0.2574074074074074" />
@@ -15,10 +17,11 @@
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.18333333333333332" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/drawable/ic_person_24.xml" value="0.26666666666666666" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/drawable/login_btn_background.xml" value="0.26666666666666666" />
+        <entry key="..\:/My Projects/GraduationProject/app/src/main/res/drawable/search_et_border.xml" value="0.2703125" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/layout/activity_bottom_navagation.xml" value="0.25416666666666665" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/layout/activity_tablayout.xml" value="0.25416666666666665" />
-        <entry key="..\:/My Projects/GraduationProject/app/src/main/res/layout/fragment_calender.xml" value="0.25416666666666665" />
+        <entry key="..\:/My Projects/GraduationProject/app/src/main/res/layout/fragment_calender.xml" value="0.12" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/layout/fragment_data.xml" value="0.25416666666666665" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/layout/fragment_login.xml" value="0.264" />
@@ -28,9 +31,12 @@
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/layout/fragment_setting.xml" value="0.25416666666666665" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/layout/fragment_settings.xml" value="0.25416666666666665" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/layout/fragment_splashscreen.xml" value="0.25416666666666665" />
-        <entry key="..\:/My Projects/GraduationProject/app/src/main/res/layout/fragment_studying.xml" value="0.12" />
+        <entry key="..\:/My Projects/GraduationProject/app/src/main/res/layout/fragment_studying.xml" value="0.264" />
+        <entry key="..\:/My Projects/GraduationProject/app/src/main/res/layout/fragment_subjects.xml" value="0.25416666666666665" />
+        <entry key="..\:/My Projects/GraduationProject/app/src/main/res/layout/gredient_layout.xml" value="0.23854166666666668" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/layout/recyclerhorizental.xml" value="0.25416666666666665" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/layout/recyclervertical.xml" value="0.25416666666666665" />
+        <entry key="..\:/My Projects/GraduationProject/app/src/main/res/layout/subjects_list_item.xml" value="0.25416666666666665" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/My Projects/GraduationProject/app/src/main/res/menu/menu1.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Microsoft/AndroidStudioProjects/GraduationProject2/app/src/main/res/drawable/editsearch.xml" value="0.1" />
