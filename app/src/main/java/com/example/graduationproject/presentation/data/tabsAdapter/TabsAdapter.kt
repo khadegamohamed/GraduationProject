@@ -17,12 +17,12 @@ import com.example.graduationproject.presentation.studying.StudyingFragment
     override fun createFragment(position: Int): Fragment {
             return when (position) {
                 0 -> {
-                    CalenderFragment()
-                }
-                1 -> {
                     StudyingFragment()
                 }
-                else -> CalenderFragment()
+                1 -> {
+                    CalenderFragment()
+                }
+                else -> StudyingFragment()
 
 
         }
