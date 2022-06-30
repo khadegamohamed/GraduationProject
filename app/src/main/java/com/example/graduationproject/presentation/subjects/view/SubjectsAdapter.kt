@@ -5,12 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.NavAction
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.graduationproject.Navgraph2Directions
 import com.example.graduationproject.R
 import com.example.graduationproject.presentation.subjects.model.SubjectModel
-import com.google.android.material.internal.ContextUtils.getActivity
-import java.security.AccessController.getContext
+
 
 class SubjectsAdapter(private val subjectsList: List<SubjectModel>) :
     RecyclerView.Adapter<SubjectsAdapter.ViewHolder>() {
@@ -44,6 +46,9 @@ class SubjectsAdapter(private val subjectsList: List<SubjectModel>) :
 
             itemView.setOnClickListener {
              // navigate to lectures of each subject
+               val navController = Navigation.findNavController(itemView)
+               navController.navigate(Navgraph2Directions
+                           .actionNavigateToLecturesFragment(subjectModel.id))
 
             }
 

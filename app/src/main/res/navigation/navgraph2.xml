@@ -52,5 +52,30 @@
             android:name="termNumber"
             app:argType="integer" />
     </fragment>
+    <action
+        android:id="@+id/action_navigate_to_lecturesFragment"
+        app:destination="@id/lecturesFragment" />
+    <fragment
+        android:id="@+id/lecturesFragment"
+        android:name="com.example.graduationproject.presentation.lectures.view.LecturesFragment"
+        android:label="fragment_lectures"
+        tools:layout="@layout/fragment_lectures" >
+        <argument
+            android:name="subject_id"
+            app:argType="integer" />
+
+    </fragment>
+    <action
+        android:id="@+id/action_navigate_to_lectureDisplayFragment"
+        app:destination="@id/lectureDisplayFragment" />
+    <fragment
+        android:id="@+id/lectureDisplayFragment"
+        android:name="com.example.graduationproject.presentation.lectures.view.LectureDisplayFragment"
+        android:label="fragment_lecture_display"
+        tools:layout="@layout/fragment_lecture_display">
+
+    </fragment>
+
+
 
 </navigation>
