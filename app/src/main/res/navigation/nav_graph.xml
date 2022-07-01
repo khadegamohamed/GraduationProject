@@ -87,7 +87,8 @@
         android:id="@+id/lectureDisplayFragment"
         android:name="com.example.graduationproject.presentation.lectures.view.LectureDisplayFragment"
         android:label="fragment_lecture_display"
-        tools:layout="@layout/fragment_lecture_display" />
+        tools:layout="@layout/fragment_lecture_display"
+        />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.graduationproject.presentation.profile.view.ProfileFragment"
