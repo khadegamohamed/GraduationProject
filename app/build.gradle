@@ -76,4 +76,7 @@ dependencies {
     // PDF Viewer
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 
+    // circular image
+    implementation 'com.mikhaellopez:circularimageview:4.3.0'
+
 }

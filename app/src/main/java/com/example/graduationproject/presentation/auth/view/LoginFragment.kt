@@ -1,4 +1,4 @@
-package com.example.graduationproject.presentation.auth
+package com.example.graduationproject.presentation.auth.view
 
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.graduationproject.databinding.FragmentLoginBinding
-import com.example.graduationproject.domain.model.User
+import com.example.graduationproject.presentation.auth.model.User
 
 
 class LoginFragment : Fragment() {
@@ -47,8 +47,7 @@ class LoginFragment : Fragment() {
                        Log.d("Login", response.code().toString())
                     if(response.body()!!.isSuccessful) {
                         findNavController().navigate(
-                            LoginFragmentDirections
-                                .actionLoginFragmentToBottomNavagation2()
+                            LoginFragmentDirections.actionLoginFragmentToBottomNavagation2()
                         )
                     }
                        Toast.makeText(activity,

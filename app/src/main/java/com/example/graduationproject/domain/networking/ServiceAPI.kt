@@ -1,8 +1,8 @@
 package com.example.graduationproject.domain.networking
 
 import com.example.graduationproject.domain.model.LoginResponse
-import com.example.graduationproject.domain.model.User
-import okhttp3.ResponseBody
+import com.example.graduationproject.domain.model.ProfileResponse
+import com.example.graduationproject.presentation.auth.model.User
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -14,5 +14,5 @@ interface ServiceAPI {
     suspend fun login(@Body user: User) : Response<LoginResponse>
 
     @GET("")
-    suspend fun getSecretInfo(token:String): Response<ResponseBody>
+    suspend fun getProfileInfo(): Response<ProfileResponse>
 }
