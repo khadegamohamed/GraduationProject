@@ -21,9 +21,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.graduationproject.R
 import com.example.graduationproject.databinding.FragmentLecturesBinding
-import com.example.graduationproject.presentation.auth.LoginFragmentDirections
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.toList
+//import kotlinx.coroutines.flow.collect
+//import kotlinx.coroutines.flow.toList
 import java.io.File
 
 private const val TAG = "LecturesFragment"
@@ -44,7 +43,7 @@ class LecturesFragment : Fragment(), LecturesAdapter.OnListItemClick {
     ): View? {
         binding = FragmentLecturesBinding.inflate(layoutInflater,container,false)
         lecturesViewModel = LecturesViewModel()
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+        /*viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             lecturesViewModel.getLectures().collect {
                  lectureAdapter = LecturesAdapter(it)
                 binding.lecturesRv.adapter = lectureAdapter
@@ -53,7 +52,7 @@ class LecturesFragment : Fragment(), LecturesAdapter.OnListItemClick {
                 lectureAdapter.onListItemClick = this@LecturesFragment
 
             }
-        }
+        }*/
         binding.addLectureFab.setOnClickListener {
             openFile()
         }
@@ -118,7 +117,7 @@ class LecturesFragment : Fragment(), LecturesAdapter.OnListItemClick {
 
     override fun onItemClick() {
      findNavController().navigate(LecturesFragmentDirections
-         .actionNavigateToLectureDisplayFragment())
+         .actionLecturesFragmentToLectureDisplayFragment())
     }
     companion object {
         const val PICK_PDF_FILE = 2

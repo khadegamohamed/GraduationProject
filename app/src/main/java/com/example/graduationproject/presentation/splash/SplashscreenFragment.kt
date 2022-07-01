@@ -34,7 +34,7 @@ class SplashscreenFragment : Fragment() {
         Handler(Looper.myLooper()!!).postDelayed({
             findNavController()
                 .navigate(SplashscreenFragmentDirections.actionSplashscreenFragmentToLoginFragment())
-        },2000)
+        },1000)
     }
 
 }

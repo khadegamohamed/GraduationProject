@@ -13,11 +13,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.example.graduationproject.Navgraph2Directions
+//import com.example.graduationproject.Navgraph2Directions
 import com.example.graduationproject.R
 import com.example.graduationproject.presentation.lectures.model.LectureModel
-import com.example.graduationproject.presentation.nav_activities.BottomNavigation
-import com.github.barteksc.pdfviewer.PDFView
+//import com.example.graduationproject.presentation.nav_activities.BottomNavigation
+//import com.github.barteksc.pdfviewer.PDFView
 import com.google.android.material.internal.ContextUtils.getActivity
 import java.io.File
 import java.security.AccessController.getContext
@@ -44,7 +44,7 @@ class LecturesAdapter(private val lectures: List<LectureModel>) :
 
   inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var lectureName: TextView = itemView.findViewById(R.id.lecture_name)
-        var pdfView: PDFView = itemView.findViewById(R.id.pdfView)
+        //var pdfView: PDFView = itemView.findViewById(R.id.pdfView)
         fun bind(lectureModel: LectureModel) {
             lectureName.text = lectureModel.lectureName
           //  lectureModel.lectureName?.let { showPdfFromAssets(it) }

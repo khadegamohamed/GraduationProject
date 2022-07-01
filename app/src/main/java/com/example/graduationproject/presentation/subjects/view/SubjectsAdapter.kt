@@ -9,7 +9,7 @@ import androidx.navigation.NavAction
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.graduationproject.Navgraph2Directions
+//import com.example.graduationproject.Navgraph2Directions
 import com.example.graduationproject.R
 import com.example.graduationproject.presentation.subjects.model.SubjectModel
 
@@ -47,8 +47,8 @@ class SubjectsAdapter(private val subjectsList: List<SubjectModel>) :
             itemView.setOnClickListener {
              // navigate to lectures of each subject
                val navController = Navigation.findNavController(itemView)
-               navController.navigate(Navgraph2Directions
-                           .actionNavigateToLecturesFragment(subjectModel.id))
+             navController.navigate(SubjectsFragmentDirections
+                 .actionSubjectsFragmentToLecturesFragment(subjectModel.id))
 
             }
 

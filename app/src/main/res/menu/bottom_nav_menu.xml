@@ -3,13 +3,13 @@
 
     <item
         android:title="Home"
-        android:id="@+id/homeFragment"
+        android:id="@+id/homeFragment2"
         android:icon="@drawable/ic_home_24"
         />
 
     <item
         android:title="Data"
-        android:id="@+id/dataFragment"
+        android:id="@+id/dataFragment2"
         android:icon="@drawable/ic_baseline_menu_book_24"
         />
     <item
@@ -18,12 +18,12 @@
         />
     <item
         android:title="Services"
-        android:id="@+id/servicesFragment"
+        android:id="@+id/servicesFragment2"
         android:icon="@drawable/ic_miscellaneous_services_24"
         />
     <item
         android:title="Settings"
-        android:id="@+id/settingsFragment"
+        android:id="@+id/settingsFragment2"
         android:icon="@drawable/ic_baseline_menu_24"
         />
 

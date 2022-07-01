@@ -9,10 +9,9 @@
     tools:context=".presentation.calender.CalenderFragment">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/_100sdp"
-        android:layout_marginBottom="@dimen/_120sdp"
+        android:layout_height="@dimen/_200sdp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/_12sdp"
         app:cardElevation="@dimen/_8sdp"
@@ -21,13 +20,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <CalendarView
-            android:id="@+id/calendarView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:theme="@style/CalenderViewCustom"
-            android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"/>
+        <com.github.sundeepk.compactcalendarview.CompactCalendarView
+            android:id="@+id/compactcalendar_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:compactCalendarBackgroundColor="@color/white"
+            app:compactCalendarCurrentDayBackgroundColor="@color/orange"
+            app:compactCalendarCurrentSelectedDayBackgroundColor="@color/orange"
+            app:compactCalendarEventIndicatorStyle="fill_large_indicator"
+            app:compactCalendarMultiEventIndicatorColor="@color/orange"
+            app:compactCalendarOtherMonthDaysTextColor="@color/orange"
+            app:compactCalendarTargetHeight="250dp"
+            app:compactCalendarTextColor="@color/dark_green"
+            app:compactCalendarTextSize="12sp" />
     </androidx.cardview.widget.CardView>
 
+    <TextView
+        android:id="@+id/monthYear"
+        android:layout_width="411dp"
+        android:layout_height="73dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.124" />
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:src="@drawable/fab_add"
+        app:fab_colorNormal="@color/orange"
+        app:fab_colorPressed="@color/orange"
+        app:fab_colorRipple="@color/orange"
+        app:fab_hideAnimation="@anim/fab_scale_down"
+        app:fab_progress_color="#FF009688"
+        app:fab_progress_indeterminate="false"
+        app:fab_progress_max="100"
+        app:fab_showAnimation="@anim/fab_scale_up"
+        app:fab_showShadow="true"
+        app:fab_size="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.951"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.845" />
 </androidx.constraintlayout.widget.ConstraintLayout>
