@@ -1,14 +1,12 @@
-package com.example.graduationproject.presentation.auth
+package com.example.graduationproject.presentation.auth.view
 
 import android.content.Context
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.graduationproject.application.LoginRepository
 import com.example.graduationproject.domain.model.LoginResponse
-import com.example.graduationproject.domain.model.User
+import com.example.graduationproject.presentation.auth.model.User
 import com.example.graduationproject.domain.networking.RetrofitBuilder
 import com.example.graduationproject.domain.networking.ServiceAPI
 import com.google.android.material.textfield.TextInputEditText
@@ -17,7 +15,7 @@ import retrofit2.Response
 
 class LoginViewModel(context: Context) : ViewModel() {
    val context = context
-   var loginResponse : MutableLiveData<Response<LoginResponse>> = MutableLiveData()
+    var loginResponse : MutableLiveData<Response<LoginResponse>> = MutableLiveData()
     var serviceInst = RetrofitBuilder.getRetrofitClientInstance()
          .create(ServiceAPI::class.java)
     private var loginRepo = LoginRepository(serviceInst)
@@ -33,8 +31,5 @@ class LoginViewModel(context: Context) : ViewModel() {
        }
     }
 
-    fun getUserInfo(token: String) = viewModelScope.launch {
-        loginRepo.getSecretInfo(token)
-    }
 
 }

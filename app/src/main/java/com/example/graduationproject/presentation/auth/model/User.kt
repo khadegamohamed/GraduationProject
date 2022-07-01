@@ -1,4 +1,4 @@
-package com.example.graduationproject.domain.model
+package com.example.graduationproject.presentation.auth.model
 
 import com.google.gson.annotations.SerializedName
 

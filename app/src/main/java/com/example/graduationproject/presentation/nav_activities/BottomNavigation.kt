@@ -24,7 +24,8 @@ class BottomNavigation : AppCompatActivity() {
         binding = ActivityBottomNavagationBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment2)as NavHostFragment
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment2)as NavHostFragment
          navController = navHostFragment.navController
 
        // navController = findNavController(R.id.nav_host_fragment2)
@@ -35,5 +36,19 @@ class BottomNavigation : AppCompatActivity() {
         bottomNavigation.menu.getItem(2).isEnabled = false
         NavigationUI.setupWithNavController(bottomNavigation, navController)
 
+       binding.personFab.setOnClickListener { v ->
+
+       }
+
     }
+
+
+
+
+
+
+
+
+
+
 }
