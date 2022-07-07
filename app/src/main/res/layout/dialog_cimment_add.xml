@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/shape_rec"
+    android:padding="@dimen/_20sdp">
+
+    <ImageButton
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back"
+        android:background="@android:color/transparent"
+        android:padding="@dimen/_5sdp"
+        />
+    <TextView
+        android:id="@+id/titleTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Add Comment"
+        android:textAlignment="center"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_green"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/commentTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/backBtn"
+        android:hint="Comment"
+        app:startIconDrawable="@drawable/ic_baseline_message_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/commentEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_rec"
+            android:inputType="textMultiLine|textCapSentences"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/commentTitle"
+        android:text="Submit"
+        android:textSize="@dimen/_14ssp"
+        android:textAllCaps="false"
+        android:background="@drawable/button_shape"
+        app:backgroundTint="@color/dark_green"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:textColor="@color/white"/>
+
+</RelativeLayout>

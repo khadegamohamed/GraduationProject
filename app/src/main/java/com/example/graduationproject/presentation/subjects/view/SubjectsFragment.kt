@@ -9,6 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.graduationproject.R
 import com.example.graduationproject.databinding.FragmentSubjectsBinding
 import com.example.graduationproject.presentation.subjects.model.SubjectModel
+import kotlinx.coroutines.flow.collect
+
 //import kotlinx.coroutines.flow.collect
 
 class SubjectsFragment : Fragment() {
@@ -26,13 +28,12 @@ class SubjectsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val termNumber = SubjectsFragmentArgs.fromBundle(requireArguments()).termNumber
-       /* viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+       viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             when (termNumber) {
                 1 -> {
-                  subjectsViewModel.getFirstTermSubjectList().collect{
+                  subjectsViewModel.getFirstTermSubjectList().collect {
                       binding.subjectsRv.adapter = SubjectsAdapter(it)
                   }
-
                 }
 
                 2 -> {
@@ -41,7 +42,7 @@ class SubjectsFragment : Fragment() {
                     }
                 }
             }
-        }*/
+        }
 
     }
 

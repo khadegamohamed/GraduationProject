@@ -20,7 +20,7 @@ class LoginRepository (private val api:ServiceAPI){
                            userCodeEt: TextInputEditText):Boolean{
         when{
             userNameEt.text.toString().isEmpty() ->{
-                userNameEt.error = "Please enter the user name"
+                userNameEt.error = "Please enter the user nameTV"
                 return false
             }
            userCodeEt.text.toString().isEmpty() ->{

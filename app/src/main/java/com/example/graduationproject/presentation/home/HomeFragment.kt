@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.graduationproject.R
@@ -52,6 +53,13 @@ class HomeFragment : Fragment() {
         binding.recyclerofposts.layoutManager = lm
         binding.recyclerofposts.adapter = adepter
         binding.recyclerofposts.setHasFixedSize(true)
+
+
+        binding.personFab.setOnClickListener {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragment2ToProfileFragment()
+            )
+        }
     }
 
 }

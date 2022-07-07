@@ -27,6 +27,20 @@
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.7" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/person_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/ic_person_24"
+        app:backgroundTint="@color/off_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.866"
+        app:layout_constraintStart_toEndOf="@+id/editText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/orange" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"

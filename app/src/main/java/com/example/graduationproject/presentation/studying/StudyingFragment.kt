@@ -19,13 +19,16 @@ class StudyingFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentStudyingBinding.inflate(inflater,container,false)
         binding.firstTermCard.setOnClickListener {  view ->
+
             findNavController().navigate(StudyingFragmentDirections
-                              .actionStudyingFragmentToSubjectsFragment(1))
+                .actionStudyingFragmentToSubjectsFragment(1))
         }
 
         binding.secondTermCard.setOnClickListener {  view ->
+
             findNavController().navigate(StudyingFragmentDirections
-                .actionStudyingFragmentToSubjectsFragment(2))
+                    .actionStudyingFragmentToSubjectsFragment(2))
+
         }
 
         return binding.root
