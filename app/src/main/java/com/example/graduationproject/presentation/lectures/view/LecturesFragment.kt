@@ -1,14 +1,12 @@
 package com.example.graduationproject.presentation.lectures.view
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.DocumentsContract
 import android.provider.OpenableColumns
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -19,18 +17,19 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.graduationproject.R
 import com.example.graduationproject.databinding.FragmentLecturesBinding
-//import kotlinx.coroutines.flow.collect
-//import kotlinx.coroutines.flow.toList
+//import com.example.graduationproject.presentation.auth.LoginFragmentDirections
+//import com.example.graduationproject.presentation.lectures.adapters.LecturesAdapter
+import kotlinx.coroutines.flow.collect
 import java.io.File
 
 private const val TAG = "LecturesFragment"
 class LecturesFragment : Fragment(), LecturesAdapter.OnListItemClick {
- private lateinit var  binding : FragmentLecturesBinding
- private lateinit var lecturesViewModel: LecturesViewModel
- private lateinit  var lectureAdapter: LecturesAdapter
- private  var fileUri: Uri = Uri.parse("content://com.android.providers.media.documents/document/document%3A219765")
+    private lateinit var  binding : FragmentLecturesBinding
+    private lateinit var lecturesViewModel: LecturesViewModel
+    private lateinit  var lectureAdapter: LecturesAdapter
+    private  var fileUri: Uri = Uri.parse("content://com.android.providers.media.documents/document/document%3A219765")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,21 +42,23 @@ class LecturesFragment : Fragment(), LecturesAdapter.OnListItemClick {
     ): View? {
         binding = FragmentLecturesBinding.inflate(layoutInflater,container,false)
         lecturesViewModel = LecturesViewModel()
-        /*viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             lecturesViewModel.getLectures().collect {
-                 lectureAdapter = LecturesAdapter(it)
+                lectureAdapter = LecturesAdapter(it)
                 binding.lecturesRv.adapter = lectureAdapter
                 lectureAdapter.notifyDataSetChanged()
 
                 lectureAdapter.onListItemClick = this@LecturesFragment
 
             }
-        }*/
+        }
+
+
         binding.addLectureFab.setOnClickListener {
             openFile()
         }
 
-        //lectureAdapter = LecturesAdapter(lecturesViewModel.getLectures())
+
 
 
         return binding.root
@@ -100,7 +101,7 @@ class LecturesFragment : Fragment(), LecturesAdapter.OnListItemClick {
 
                         if(myCursor != null && myCursor.moveToFirst()){
                             pdfName = myCursor.getString(myCursor
-                                      .getColumnIndex(OpenableColumns.DISPLAY_NAME))
+                                .getColumnIndex(OpenableColumns.DISPLAY_NAME))
                         }
                         // how to change id for each lecture
                         lecturesViewModel.addLecture(pdfName,pdfFile)
@@ -116,9 +117,10 @@ class LecturesFragment : Fragment(), LecturesAdapter.OnListItemClick {
     }
 
     override fun onItemClick() {
-     findNavController().navigate(LecturesFragmentDirections
-         .actionLecturesFragmentToLectureDisplayFragment())
+        findNavController().navigate(LecturesFragmentDirections
+            .actionNavigateToLectureDisplayFragment())
     }
+
     companion object {
         const val PICK_PDF_FILE = 2
     }

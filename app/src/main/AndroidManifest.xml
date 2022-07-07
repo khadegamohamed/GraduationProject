@@ -12,9 +12,7 @@
         android:theme="@style/Theme.GraduationProject"
         android:name=".presentation.core.IGamaaApp">
 
-        <activity
-            android:name=".presentation.nav_activities.BottomNavigation"
-            android:exported="true" />
+
         <activity
             android:name=".presentation.nav_activities.MainActivity"
             android:exported="true">

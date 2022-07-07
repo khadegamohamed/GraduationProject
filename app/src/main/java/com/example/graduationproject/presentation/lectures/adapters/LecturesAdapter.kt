@@ -13,19 +13,17 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-//import com.example.graduationproject.Navgraph2Directions
 import com.example.graduationproject.R
 import com.example.graduationproject.presentation.lectures.model.LectureModel
-//import com.example.graduationproject.presentation.nav_activities.BottomNavigation
-//import com.github.barteksc.pdfviewer.PDFView
+import com.github.barteksc.pdfviewer.PDFView
 import com.google.android.material.internal.ContextUtils.getActivity
 import java.io.File
 import java.security.AccessController.getContext
 
 class LecturesAdapter(private val lectures: List<LectureModel>) :
     RecyclerView.Adapter<LecturesAdapter.ViewHolder>() {
- private lateinit var  context:Context
- var onListItemClick: OnListItemClick? = null
+    private lateinit var  context:Context
+    var onListItemClick: OnListItemClick? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -42,12 +40,12 @@ class LecturesAdapter(private val lectures: List<LectureModel>) :
 
     override fun getItemCount(): Int = lectures.size
 
-  inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var lectureName: TextView = itemView.findViewById(R.id.lecture_name)
-        //var pdfView: PDFView = itemView.findViewById(R.id.pdfView)
+        var pdfView: PDFView = itemView.findViewById(R.id.pdfView)
         fun bind(lectureModel: LectureModel) {
             lectureName.text = lectureModel.lectureName
-          //  lectureModel.lectureName?.let { showPdfFromAssets(it) }
+            //  lectureModel.lectureName?.let { showPdfFromAssets(it) }
 
             itemView.setOnClickListener {
 //                val navController = Navigation.findNavController(itemView)

@@ -19,28 +19,28 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class CalenderFragment : Fragment(),DialogeEvent.OnEventSelected {
-private lateinit var  binding:FragmentCalenderBinding
-private lateinit var compactCalendarView: CompactCalendarView
-private lateinit var  date:Date
+class CalenderFragment : Fragment(), DialogeEvent.OnEventSelected {
+    private lateinit var binding: FragmentCalenderBinding
+    private lateinit var compactCalendarView: CompactCalendarView
+    private lateinit var date: Date
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentCalenderBinding.inflate(inflater,container,false)
+        binding = FragmentCalenderBinding.inflate(inflater, container, false)
         compactCalendarView = binding.compactcalendarView
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-     compactCalendarView.setFirstDayOfWeek(Calendar.SATURDAY)
-        var mydate:String ="2022/3/3 18:20:45"
+        compactCalendarView.setFirstDayOfWeek(Calendar.SATURDAY)
+        var mydate: String = "2022/3/3 18:20:45"
         var simpleDateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
         date = simpleDateFormat.parse(mydate)
-        var dateInMillis:Long = date.time
+        var dateInMillis: Long = date.time
         val ev1 = Event(Color.BLACK, dateInMillis, "Some extra data that I want to store.")
         val ev2 = Event(Color.BLACK, dateInMillis, "Some extra data that I want to store.")
         val ev3 = Event(Color.BLACK, dateInMillis, "Some extra data that I want to store.")
@@ -63,26 +63,28 @@ private lateinit var  date:Date
         //set title on calendar scroll
         compactCalendarView.setListener(object : CompactCalendarViewListener {
             override fun onDayClick(dateClicked: Date) {
-                Log.d("calender", "onViewCreated:"+compactCalendarView.getEvents(dateClicked.time))
+                Log.d(
+                    "calender",
+                    "onViewCreated:" + compactCalendarView.getEvents(dateClicked.time)
+                )
             }
+
             override fun onMonthScroll(firstDayOfNewMonth: Date) {
                 binding.monthYear.setText(dateFormatForMonth.format(firstDayOfNewMonth))
             }
         })
-binding.fab.setOnClickListener {
+        binding.fab.setOnClickListener {
 
-var dialogeEvent:DialogeEvent = DialogeEvent()
-    dialogeEvent.show(parentFragmentManager,"DialogEvent")
-    Log.d(TAG, "onViewCreated: "+"hello")
-}
+            var dialogeEvent: DialogeEvent = DialogeEvent()
+            dialogeEvent.show(parentFragmentManager, "DialogEvent")
+            Log.d(TAG, "onViewCreated: " + "hello")
+        }
 
     }
 
     override fun sendEvent(startEvent: String, endEvent: String) {
-        Log.d(TAG, "sendEvent: "+startEvent+endEvent)
+        Log.d(TAG, "sendEvent: " + startEvent + endEvent)
     }
-
-
 
 
 }

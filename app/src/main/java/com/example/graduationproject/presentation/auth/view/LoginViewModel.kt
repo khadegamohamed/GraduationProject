@@ -14,10 +14,8 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class LoginViewModel(context: Context) : ViewModel() {
-   val context = context
     var loginResponse : MutableLiveData<Response<LoginResponse>> = MutableLiveData()
-    var serviceInst = RetrofitBuilder.getRetrofitClientInstance()
-         .create(ServiceAPI::class.java)
+    var serviceInst = RetrofitBuilder.getAPIService(context)
     private var loginRepo = LoginRepository(serviceInst)
 
     fun signIn(userNameEt: TextInputEditText, userCodeEt: TextInputEditText) =
