@@ -1,8 +1,33 @@
 <resources>
     <string name="app_name">GraduationProject</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="user_name">user name</string>
     <string name="user_code">user_code</string>
     <string name="second_term_subjects">Second Term subjects</string>
+    <string name="brightness">brightness</string>
+    <string name="on">On</string>
+    <string name="english">English</string>
+    <string name="about_app">About App</string>
+    <string name="log_out">Log out</string>
+    <string name="add_comment">Add Comment</string>
+    <string name="comment">Comment</string>
+    <string name="submit">Submit</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="profile_name">Profile Name</string>
+    <string name="update">Update</string>
+    <string name="lecture_comments">Lecture Comments</string>
+    <string name="login">LogIn</string>
+    <string name="mera_martin">Mera Martin</string>
+    <string name="user_name1">User Name</string>
+    <string name="user_role">User role</string>
+    <string name="edit_profile1">edit Profile</string>
+    <string name="i_gamaa" translatable="false">I جامعة</string>
+    <string name="first_term">First Term</string>
+    <string name="second_term">Second Term</string>
+    <string name="lecture_name">Lecture name</string>
+    <string name="name">Name</string>
+    <string name="the_comment">The Comment</string>
+    <string name="dd_mm_yyyy">dd/MM/yyyy</string>
+    <string name="subject_name">Subject name</string>
 </resources>

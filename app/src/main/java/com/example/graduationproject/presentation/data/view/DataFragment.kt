@@ -14,7 +14,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 class DataFragment : Fragment() {
     private lateinit var binding: FragmentDataBinding
     private lateinit var adapter: TabsAdapter
- private val tabsArray = arrayListOf("Calender","Studying")
+ private val tabsArray = arrayListOf("Studying","Calender")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

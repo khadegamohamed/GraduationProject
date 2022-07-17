@@ -5,11 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import com.example.graduationproject.R
 import com.example.graduationproject.databinding.FragmentSubjectsBinding
-import com.example.graduationproject.presentation.subjects.model.SubjectModel
-import kotlinx.coroutines.flow.collect
 
 //import kotlinx.coroutines.flow.collect
 
@@ -21,7 +19,7 @@ class SubjectsFragment : Fragment() {
         savedInstanceState: Bundle?): View? {
 
         binding = FragmentSubjectsBinding.inflate(inflater, container, false)
-        subjectsViewModel = SubjectsViewModel()
+        subjectsViewModel = SubjectsViewModel(this.requireContext())
         return binding.root
     }
 
@@ -29,16 +27,28 @@ class SubjectsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val termNumber = SubjectsFragmentArgs.fromBundle(requireArguments()).termNumber
        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+
             when (termNumber) {
                 1 -> {
-                  subjectsViewModel.getFirstTermSubjectList().collect {
-                      binding.subjectsRv.adapter = SubjectsAdapter(it)
-                  }
+                subjectsViewModel.getFirstTermSubjects()
+                subjectsViewModel.firstSubjectsResponse.observe(viewLifecycleOwner,
+                    Observer {
+                        if(it != null)
+                            binding.subjectsRv.adapter = SubjectsAdapter(it)
+
+                    })
+
                 }
 
                 2 -> {
-                    subjectsViewModel.getSecondTermSubjectList().collect {
-                        binding.subjectsRv.adapter = SubjectsAdapter(it)
+                    subjectsViewModel.getSecondTermSubjects()
+                    subjectsViewModel.secondTermSubjectsResponse.observe(viewLifecycleOwner,
+                        Observer {
+                            if(it != null)
+                                binding.subjectsRv.adapter = SubjectsAdapter(it)
+
+                        }
+                    )
                     }
                 }
             }
@@ -47,4 +57,3 @@ class SubjectsFragment : Fragment() {
     }
 
 
-}

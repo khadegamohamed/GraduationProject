@@ -47,10 +47,7 @@ class LoginFragment : Fragment() {
                                             , Observer { response ->
 
                    if(response.isSuccessful){
-                       Log.d("Login", response.body().toString())
-                       Log.d("Login", response.message().toString())
-                       Log.d("Login", response.code().toString())
-                    if(response.body()!!.isSuccessful) {
+                    if(response.body()!= null) {
                         findNavController().navigate(
                             LoginFragmentDirections.actionLoginFragmentToHomeFragment2() )
 
@@ -58,7 +55,10 @@ class LoginFragment : Fragment() {
                        val tokenVal = response.body()!!.token
                         //save token to sharedPreference
                         sharedPrefManager.saveToken(tokenVal)
-
+                       val userRole= response.body()!!.role
+                        //save role to sharedPreference
+                        sharedPrefManager.saveUserRole(userRole)
+                        Log.i("Login", response.body().toString())
                     }
                        Toast.makeText(activity,
                            response.body()!!.massage,Toast.LENGTH_SHORT).show()
@@ -67,11 +67,11 @@ class LoginFragment : Fragment() {
                    }
 
                 })
-         // temp
-            // findNavController().navigate(LoginFragmentDirections
-            //  .actionLoginFragmentToHomeFragment2())
-            }
 
+            }
+            // temp
+          // findNavController().navigate(LoginFragmentDirections
+           //     .actionLoginFragmentToHomeFragment2())
         }
 
     }

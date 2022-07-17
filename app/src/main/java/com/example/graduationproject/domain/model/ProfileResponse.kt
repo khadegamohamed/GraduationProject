@@ -13,7 +13,7 @@ data class ProfileResponse(
     @SerializedName("profile_photo")
     @Expose
     var profile_photo: String,
-    @SerializedName("id")
+    @SerializedName("_id")
     @Expose
     var _id: String,
     @SerializedName("role")

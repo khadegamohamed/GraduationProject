@@ -15,42 +15,46 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.graduationproject.databinding.FragmentLecturesBinding
+import com.example.graduationproject.presentation.lectures.view.LecturesFragment.Companion.PICK_PDF_FILE
 //import com.example.graduationproject.presentation.auth.LoginFragmentDirections
 //import com.example.graduationproject.presentation.lectures.adapters.LecturesAdapter
 import kotlinx.coroutines.flow.collect
 import java.io.File
 
 private const val TAG = "LecturesFragment"
-class LecturesFragment : Fragment(), LecturesAdapter.OnListItemClick {
-    private lateinit var  binding : FragmentLecturesBinding
+
+class LecturesFragment : Fragment() {
+    private lateinit var binding: FragmentLecturesBinding
     private lateinit var lecturesViewModel: LecturesViewModel
-    private lateinit  var lectureAdapter: LecturesAdapter
-    private  var fileUri: Uri = Uri.parse("content://com.android.providers.media.documents/document/document%3A219765")
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private lateinit var lectureAdapter: LecturesAdapter
+    private val args: LecturesFragmentArgs by navArgs()
+    private var fileUri: Uri =
+        Uri.parse("content://com.android.providers.media.documents/document/document%3A219765")
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentLecturesBinding.inflate(layoutInflater,container,false)
-        lecturesViewModel = LecturesViewModel()
+        savedInstanceState: Bundle?, ): View? {
+
+        binding = FragmentLecturesBinding.inflate(layoutInflater, container, false)
+        lecturesViewModel = LecturesViewModel(this.requireContext())
+        var subjectId = args.subjectId
+
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            lecturesViewModel.getLectures().collect {
-                lectureAdapter = LecturesAdapter(it)
-                binding.lecturesRv.adapter = lectureAdapter
-                lectureAdapter.notifyDataSetChanged()
+            lecturesViewModel.getAllLectures(subjectId)
+            lecturesViewModel.lecturesResponse.observe(viewLifecycleOwner,
+                Observer {
+                    lectureAdapter = LecturesAdapter(it)
+                    binding.lecturesRv.adapter = lectureAdapter
+                    lectureAdapter.notifyDataSetChanged()
+                })
 
-                lectureAdapter.onListItemClick = this@LecturesFragment
 
-            }
         }
 
 
@@ -58,12 +62,8 @@ class LecturesFragment : Fragment(), LecturesAdapter.OnListItemClick {
             openFile()
         }
 
-
-
-
         return binding.root
     }
-
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -72,42 +72,42 @@ class LecturesFragment : Fragment(), LecturesAdapter.OnListItemClick {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "application/pdf"
         }
-        startActivityForResult(intent, LectureDisplayFragment.PICK_PDF_FILE)
+        startActivityForResult(intent, PICK_PDF_FILE)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("Range")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        when(requestCode){
-            PICK_PDF_FILE -> if (resultCode == RESULT_OK){
-                val uri:Uri = data?.data!!
-                val uriString:String = uri.toString()
-                lateinit var  pdfName: String
+        when (requestCode) {
+            PICK_PDF_FILE -> if (resultCode == RESULT_OK) {
+                val uri: Uri = data?.data!!
+                val uriString: String = uri.toString()
+                lateinit var pdfName: String
                 var pdfFile: File? = null
-                if(uriString.startsWith("content://")){
-                    var myCursor:Cursor? = null
+                if (uriString.startsWith("content://")) {
+                    var myCursor: Cursor? = null
                     try {
                         myCursor = activity?.applicationContext!!
-                            .contentResolver.query(uri,null,
-                                null,null,null)
+                            .contentResolver.query(uri, null,
+                                null, null, null)
                         // to create file from uri
                         pdfFile = File(uri.path)
                         // I want to send file uri to display fragment to open it
-                        if(resultCode == RESULT_OK){
+                        if (resultCode == RESULT_OK) {
                             fileUri = data.data!!
                             Log.d(TAG, "file uri : $fileUri")
                         }
 
-                        if(myCursor != null && myCursor.moveToFirst()){
+                        if (myCursor != null && myCursor.moveToFirst()) {
                             pdfName = myCursor.getString(myCursor
                                 .getColumnIndex(OpenableColumns.DISPLAY_NAME))
                         }
                         // how to change id for each lecture
-                        lecturesViewModel.addLecture(pdfName,pdfFile)
-                        Toast.makeText(context,pdfName,Toast.LENGTH_LONG).show()
+                        lecturesViewModel.addLecture(pdfName, pdfFile)
+                        Toast.makeText(context, pdfName, Toast.LENGTH_LONG).show()
 
-                    }finally {
+                    } finally {
                         myCursor?.close()
                     }
 
@@ -116,10 +116,6 @@ class LecturesFragment : Fragment(), LecturesAdapter.OnListItemClick {
         }
     }
 
-    override fun onItemClick() {
-        findNavController().navigate(LecturesFragmentDirections
-            .actionNavigateToLectureDisplayFragment())
-    }
 
     companion object {
         const val PICK_PDF_FILE = 2

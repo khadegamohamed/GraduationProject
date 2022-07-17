@@ -10,11 +10,11 @@
         android:name="com.example.graduationproject.presentation.auth.view.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_homeFragment2"
-            app:destination="@id/homeFragment2" />
-    </fragment>
 
+    </fragment>
+    <action
+        android:id="@+id/action_loginFragment_to_homeFragment2"
+        app:destination="@id/homeFragment2" />
     <fragment
         android:id="@+id/splashscreenFragment"
         android:name="com.example.graduationproject.presentation.splash.SplashscreenFragment"
@@ -27,8 +27,11 @@
             app:popUpTo="@id/splashscreenFragment"
             app:popUpToInclusive="true"
             />
-    </fragment>
 
+    </fragment>
+    <action
+        android:id="@+id/action_splashscreenFragment_to_homeFragment2"
+        app:destination="@id/homeFragment2" />
     <fragment
         android:id="@+id/dataFragment2"
         android:name="com.example.graduationproject.presentation.data.view.DataFragment"
@@ -52,7 +55,11 @@
         android:id="@+id/settingsFragment2"
         android:name="com.example.graduationproject.presentation.settings.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment2_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/studyingFragment"
@@ -75,6 +82,9 @@
         <argument
             android:name="termNumber"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_subjectsFragment_to_pdfFragment"
+            app:destination="@id/pdfFragment" />
     </fragment>
     <action
         android:id="@+id/action_navigate_to_lecturesFragment"
@@ -86,19 +96,25 @@
         tools:layout="@layout/fragment_lectures" >
         <argument
             android:name="subject_id"
-            app:argType="integer" />
-        <action
-            android:id="@+id/action_navigate_to_lectureDisplayFragment"
-            app:destination="@id/lectureDisplayFragment" />
+            app:argType="string" />
+
 
     </fragment>
-
+    <action
+        android:id="@+id/action_navigate_to_lectureDisplayFragment"
+        app:destination="@id/lectureDisplayFragment" />
+    <action
+        android:id="@+id/action_lecturesFragment_to_lectureCommentsFragment"
+        app:destination="@id/lectureCommentsFragment" />
     <fragment
         android:id="@+id/lectureDisplayFragment"
         android:name="com.example.graduationproject.presentation.lectures.view.LectureDisplayFragment"
         android:label="fragment_lecture_display"
         tools:layout="@layout/fragment_lecture_display">
 
+        <argument
+            android:name="lecture"
+            app:argType="com.example.graduationproject.domain.model.Lecture" />
     </fragment>
 
 
@@ -106,6 +122,30 @@
         android:id="@+id/profileFragment"
         android:name="com.example.graduationproject.presentation.profile.view.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment2"
+            app:destination="@id/editProfileFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/pdfFragment"
+        android:name="com.example.graduationproject.presentation.lectures.view.uploadLectures.PdfFragment"
+        android:label="fragment_p_d_f"
+        tools:layout="@layout/fragment_p_d_f" />
+    <fragment
+        android:id="@+id/editProfileFragment2"
+        android:name="com.example.graduationproject.presentation.profile.view.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+    </fragment>
+    <fragment
+        android:id="@+id/lectureCommentsFragment"
+        android:name="com.example.graduationproject.presentation.lectures.view.LectureCommentsFragment"
+        android:label="fragment_lecture_comments"
+        tools:layout="@layout/fragment_lecture_comments" >
+        <argument
+            android:name="lectureId"
+            app:argType="string" />
+    </fragment>
 
 </navigation>
