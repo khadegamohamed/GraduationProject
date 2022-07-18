@@ -9,15 +9,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.example.graduationproject.domain.common.SharedPreferenceManager
 import com.example.graduationproject.databinding.FragmentLoginBinding
+import com.example.graduationproject.domain.common.SharedPreferenceManager
 import com.example.graduationproject.presentation.auth.model.User
+
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var loginViewModel: LoginViewModel
-    private lateinit var sharedPrefManager:SharedPreferenceManager
-
+    private lateinit var sharedPrafrence: SharedPreferenceManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,16 +25,14 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         loginViewModel = LoginViewModel(requireActivity().applicationContext)
-        sharedPrefManager = SharedPreferenceManager(this.requireContext())
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        sharedPrafrence = SharedPreferenceManager(requireContext())
         var userNameEt = binding.usernameEt
         var userCodeEt = binding.userCodeEt
-
         binding.loginBtn.setOnClickListener {
             var valid = loginViewModel.signIn(userNameEt, userCodeEt)
             if (valid) {
@@ -45,20 +43,15 @@ class LoginFragment : Fragment() {
                 loginViewModel.login(user)
                 loginViewModel.loginResponse.observe(viewLifecycleOwner
                                             , Observer { response ->
-
                    if(response.isSuccessful){
                        Log.d("Login", response.body().toString())
                        Log.d("Login", response.message().toString())
                        Log.d("Login", response.code().toString())
+                       sharedPrafrence.saveToken(response.body()!!.token)
                     if(response.body()!!.isSuccessful) {
                         findNavController().navigate(
-                            LoginFragmentDirections.actionLoginFragmentToHomeFragment2() )
-
-
-                       val tokenVal = response.body()!!.token
-                        //save token to sharedPreference
-                        sharedPrefManager.saveToken(tokenVal)
-
+                            LoginFragmentDirections.actionLoginFragmentToHomeFragment2()
+                        )
                     }
                        Toast.makeText(activity,
                            response.body()!!.massage,Toast.LENGTH_SHORT).show()
@@ -67,15 +60,13 @@ class LoginFragment : Fragment() {
                    }
 
                 })
-         // temp
-            // findNavController().navigate(LoginFragmentDirections
-            //  .actionLoginFragmentToHomeFragment2())
+
+
             }
 
         }
 
     }
-
 
 
 }

@@ -117,8 +117,7 @@ class LecturesFragment : Fragment(), LecturesAdapter.OnListItemClick {
     }
 
     override fun onItemClick() {
-        findNavController().navigate(LecturesFragmentDirections
-            .actionNavigateToLectureDisplayFragment())
+        findNavController().navigate(LecturesFragmentDirections.actionLecturesFragmentToLectureDisplayFragment())
     }
 
     companion object {

@@ -14,7 +14,6 @@
             android:id="@+id/action_loginFragment_to_homeFragment2"
             app:destination="@id/homeFragment2" />
     </fragment>
-
     <fragment
         android:id="@+id/splashscreenFragment"
         android:name="com.example.graduationproject.presentation.splash.SplashscreenFragment"
@@ -28,7 +27,30 @@
             app:popUpToInclusive="true"
             />
     </fragment>
+    <fragment
+        android:id="@+id/studyingFragment"
+        android:name="com.example.graduationproject.presentation.studying.StudyingFragment"
+        android:label="fragment_studying"
+        tools:layout="@layout/fragment_studying" >
+        <action
+            android:id="@+id/action_studyingFragment_to_subjectsFragment"
+            app:destination="@id/subjectsFragment" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/subjectsFragment"
+        android:name="com.example.graduationproject.presentation.subjects.view.SubjectsFragment"
+        android:label="fragment_subjects"
+        tools:layout="@layout/fragment_subjects">
+        <argument
+            android:name="termNumber"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_subjectsFragment_to_lecturesFragment"
+            app:destination="@id/lecturesFragment"
+
+            />
+    </fragment>
     <fragment
         android:id="@+id/dataFragment2"
         android:name="com.example.graduationproject.presentation.data.view.DataFragment"
@@ -36,12 +58,26 @@
         tools:layout="@layout/fragment_data" />
     <fragment
         android:id="@+id/homeFragment2"
-        android:name="com.example.graduationproject.presentation.home.HomeFragment"
+        android:name="com.example.graduationproject.presentation.home.view.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment2_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            android:id="@+id/action_homeFragment2_to_newPostFragment"
+            app:destination="@id/newPostFragment" />
+
+        <action
+            android:id="@+id/action_homeFragment2_to_listOfPostImageFragment"
+            app:destination="@id/listOfPostImageFragment" />
+        <action
+            android:id="@+id/action_homeFragment2_to_whoIsLike"
+            app:destination="@id/whoIsLike" />
+        <action
+            android:id="@+id/action_homeFragment2_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
+        <action
+            android:id="@+id/action_homeFragment2_to_editPostFragment"
+            app:destination="@id/editPostFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/servicesFragment2"
@@ -53,59 +89,100 @@
         android:name="com.example.graduationproject.presentation.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
-
-    <fragment
-        android:id="@+id/studyingFragment"
-        android:name="com.example.graduationproject.presentation.studying.StudyingFragment"
-        android:label="fragment_studying"
-        tools:layout="@layout/fragment_studying" >
-
-        <argument
-            android:name="termNumber"
-            app:argType="integer" />
-    </fragment>
-    <action
-        android:id="@+id/action_studyingFragment_to_subjectsFragment"
-        app:destination="@id/subjectsFragment" />
-    <fragment
-        android:id="@+id/subjectsFragment"
-        android:name="com.example.graduationproject.presentation.subjects.view.SubjectsFragment"
-        android:label="fragment_subjects"
-        tools:layout="@layout/fragment_subjects" >
-        <argument
-            android:name="termNumber"
-            app:argType="integer" />
-    </fragment>
-    <action
-        android:id="@+id/action_navigate_to_lecturesFragment"
-        app:destination="@id/lecturesFragment" />
     <fragment
         android:id="@+id/lecturesFragment"
         android:name="com.example.graduationproject.presentation.lectures.view.LecturesFragment"
         android:label="fragment_lectures"
         tools:layout="@layout/fragment_lectures" >
         <argument
-            android:name="subject_id"
+            android:name="termNumber"
             app:argType="integer" />
         <action
-            android:id="@+id/action_navigate_to_lectureDisplayFragment"
+            android:id="@+id/action_lecturesFragment_to_lectureDisplayFragment"
             app:destination="@id/lectureDisplayFragment" />
-
     </fragment>
-
     <fragment
         android:id="@+id/lectureDisplayFragment"
         android:name="com.example.graduationproject.presentation.lectures.view.LectureDisplayFragment"
         android:label="fragment_lecture_display"
-        tools:layout="@layout/fragment_lecture_display">
-
-    </fragment>
-
-
+        tools:layout="@layout/fragment_lecture_display" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.graduationproject.presentation.profile.view.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/newPostFragment"
+        android:name="com.example.graduationproject.presentation.newPosts.view.NewPostFragment"
+        android:label="fragment_newpost"
+        tools:layout="@layout/fragment_newpost" >
+        <action
+            android:id="@+id/action_newPostFragment_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/listOfPostImageFragment"
+        android:name="com.example.graduationproject.presentation.home.view.ListOfPostImageFragment"
+        android:label="ListOfPostImageFragment" >
+        <argument
+            android:name="Image"
+            app:argType="string"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/whoIsLike"
+        android:name="com.example.graduationproject.presentation.home.view.WhoIsLike"
+        android:label="WhoIsLike" >
+        <argument
+            android:name="ListOfLikes"
+            app:argType="com.example.graduationproject.presentation.home.model.ListOfLikes"
+
+            />
+
+    </fragment>
+    <fragment
+        android:id="@+id/commentsFragment"
+        android:name="com.example.graduationproject.presentation.home.view.CommentsFragment"
+        android:label="CommentsFragment" >
+        <argument
+            android:name="ListOfComments"
+            app:argType="com.example.graduationproject.presentation.home.model.ListOfComments"
+
+            />
+        <action
+            android:id="@+id/action_commentsFragment_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/editPostFragment"
+        android:name="com.example.graduationproject.presentation.newPosts.view.EditPostFragment"
+        android:label="EditPostFragment" >
+        <action
+            android:id="@+id/action_editPostFragment_to_homeFragment2"
+            app:destination="@id/homeFragment2" >
+        </action>
+        <argument
+            android:name="idPost"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/calenderFragment"
+        android:name="com.example.graduationproject.presentation.calender.view.CalenderFragment"
+        android:label="fragment_calender"
+        tools:layout="@layout/fragment_calender" >
+    </fragment>
+    <action
+        android:id="@+id/action_calenderFragment_to_showEvents"
+        app:destination="@id/showEvents" />
+    <fragment
+        android:id="@+id/showEvents"
+        android:name="com.example.graduationproject.presentation.calender.view.ShowEvents"
+        android:label="ShowEvents" >
+        <argument
+            android:name="theDate"
+            app:argType="string" />
+    </fragment>
 </navigation>

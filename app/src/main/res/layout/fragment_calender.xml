@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    tools:context=".presentation.calender.CalenderFragment">
+    tools:context=".presentation.calender.view.CalenderFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -39,11 +39,15 @@
 
     <TextView
         android:id="@+id/monthYear"
-        android:layout_width="411dp"
-        android:layout_height="73dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="hello"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_20sdp"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.124" />

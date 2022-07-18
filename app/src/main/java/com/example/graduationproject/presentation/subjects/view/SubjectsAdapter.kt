@@ -47,8 +47,7 @@ class SubjectsAdapter(private val subjectsList: List<SubjectModel>) :
             itemView.setOnClickListener {
              // navigate to lectures of each subject
                val navController = Navigation.findNavController(itemView)
-             navController.navigate(SubjectsFragmentDirections
-                 .actionNavigateToLecturesFragment(subjectModel.id))
+             navController.navigate(SubjectsFragmentDirections.actionSubjectsFragmentToLecturesFragment(subjectModel.id))
 
             }
 

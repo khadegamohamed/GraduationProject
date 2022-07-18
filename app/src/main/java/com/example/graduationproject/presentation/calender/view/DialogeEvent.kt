@@ -1,4 +1,4 @@
-package com.example.graduationproject.presentation.calender
+package com.example.graduationproject.presentation.calender.view
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
@@ -11,14 +11,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.DatePicker
-import android.widget.DatePicker.OnDateChangedListener
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.graduationproject.databinding.DialogEventBinding
+import com.example.graduationproject.presentation.calender.model.EventRequest
 import java.lang.ClassCastException
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 class DialogeEvent: DialogFragment(){
 
@@ -66,9 +65,14 @@ class DialogeEvent: DialogFragment(){
             val datePickerDialog = DatePickerDialog(
             requireContext(),
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    var realMonth = monthOfYear+1
+                    if(realMonth<10){
+                        bindingDialog.tvStartDate.text = "$dayOfMonth, 0$monthOfYear, $year"
+                        startDataFormat = "$year/0$monthOfYear/$dayOfMonth"
+                    }else{
                     bindingDialog.tvStartDate.text = "$dayOfMonth, $monthOfYear, $year"
                     startDataFormat = "$year/$monthOfYear/$dayOfMonth"
-                },
+                }},
                 year,
                 month,
                 day
@@ -84,8 +88,14 @@ class DialogeEvent: DialogFragment(){
             val datePickerDialog = DatePickerDialog(
                 requireContext(),
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    bindingDialog.tvEndDate.text = "$dayOfMonth, $monthOfYear, $year"
-                    endDataFormat = "$year/$monthOfYear/$dayOfMonth"
+                    var realMonth = monthOfYear+1
+                    if(realMonth<10){
+                        bindingDialog.tvEndDate.text = "$dayOfMonth, 0$monthOfYear, $year"
+                        endDataFormat = "$year/0$monthOfYear/$dayOfMonth"
+                    }else{
+                        bindingDialog.tvEndDate.text = "$dayOfMonth, $monthOfYear, $year"
+                        endDataFormat = "$year/$monthOfYear/$dayOfMonth"
+                    }
                 },
                 year,
                 month,
@@ -98,8 +108,20 @@ class DialogeEvent: DialogFragment(){
             timePicker = TimePickerDialog(
                 requireContext(),
                 { view, hourOfDay, minute ->
-                    bindingDialog.tvStartTime.text = String.format("%d : %d", hourOfDay, minute)
-                    startTimeFormat = "$startDataFormat $hourOfDay:$minute:00"
+                    var realHour =""
+                    var realMinute=""
+                    if (hourOfDay<10){
+                        realHour = "0$hourOfDay"
+                    }else{
+                        realHour="$hourOfDay"
+                    }
+                    if (minute<10){
+                        realMinute= "0$minute"
+                    }else{
+                        realMinute="$minute"
+                    }
+                    bindingDialog.tvStartTime.text = String.format("%d : %d", realHour, realMinute)
+                    startTimeFormat = "$startDataFormat $realHour:$realMinute:00"
                     var simpleDateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
                     date = simpleDateFormat.parse(startTimeFormat)
                     var startEvent:Long = date.time
@@ -112,8 +134,20 @@ class DialogeEvent: DialogFragment(){
             timePicker = TimePickerDialog(
                 requireContext(),
                 { view, hourOfDay, minute ->
-                    bindingDialog.tvEndTime.text = String.format("%d : %d", hourOfDay, minute)
-                    endTimeFormat ="$endDataFormat $hourOfDay:$minute:00"
+                    var realHour =""
+                    var realMinute=""
+                    if (hourOfDay<10){
+                        realHour = "0$hourOfDay"
+                    }else{
+                        realHour="$hourOfDay"
+                    }
+                    if (minute<10){
+                        realMinute= "0$minute"
+                    }else{
+                        realMinute="$minute"
+                    }
+                    bindingDialog.tvEndTime.text = String.format("%d : %d", realHour, realMinute)
+                    endTimeFormat ="$endDataFormat $realHour:$realMinute:00"
                     var simpleDateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
                     date = simpleDateFormat.parse(endTimeFormat)
                     var endEvent:Long = date.time
@@ -122,17 +156,34 @@ class DialogeEvent: DialogFragment(){
             timePicker.show()
 
         }
+
         bindingDialog.addEvent.setOnClickListener {
-            onEventSelected.sendEvent(startTimeFormat!!,endTimeFormat!!)
+            var nameEvent= bindingDialog.tvDescription.text.toString()
+            onEventSelected.sendEvent(nameEvent,startTimeFormat!!,endTimeFormat!!,requireContext())
+            var eventRequest = EventRequest(nameEvent,startTimeFormat!!,endTimeFormat!!)
+            var calender1ViewModel = CalenderViewModel(requireContext())
+            Log.i("DIALOGE", "onViewCreated:RRRRRRR ")
+            calender1ViewModel.addEvent(eventRequest)
+            Log.i("DIALOGE", "onViewCreated: oooooooooo")
+            calender1ViewModel.mutableAddEventsResponse.observe(viewLifecycleOwner,{
+                if (it.isSuccessful){
+                    Log.d("DIALOGE", "onViewCreated: " + it.body())
+                    Toast.makeText(requireContext(),"you add Event", Toast.LENGTH_SHORT).show()
+                }else{
+                    Log.d("DIALOGE", "onViewCreated: " + it.body())
+                    Toast.makeText(requireContext(),"you cannot add Event", Toast.LENGTH_SHORT).show()
+                }
+            })
             getDialog()?.dismiss()
         }
+
 
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
-            onEventSelected =CalenderFragment()
+            onEventSelected = CalenderFragment()
         }catch (e: ClassCastException){
             Log.d(TAG, "onAttach:ClassCastException "+e.message)
         }
@@ -144,8 +195,7 @@ class DialogeEvent: DialogFragment(){
         return Pair(hour, minute)
     }
     public interface OnEventSelected{
-
-        fun  sendEvent( startEvent: String ,endEvent: String)
+        fun  sendEvent( nameEvent:String ,startEvent: String ,endEvent: String,context: Context)
     }
 
 

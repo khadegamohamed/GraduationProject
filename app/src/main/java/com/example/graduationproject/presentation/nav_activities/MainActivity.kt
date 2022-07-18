@@ -1,6 +1,7 @@
 package com.example.graduationproject.presentation.nav_activities
 
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -17,6 +18,7 @@ import com.example.graduationproject.presentation.profile.view.ProfileFragment
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -38,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         NavigationUI.setupWithNavController(bottomNavigation, navController)
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            if (destination.id == R.id.loginFragment || destination.id == R.id.splashscreenFragment) {
+          /*  if (destination.id == R.id.loginFragment || destination.id == R.id.splashscreenFragment) {
                 binding.bottomNavigationView.visibility = View.GONE
                 binding.bottomAppBar.visibility = View.GONE
                 binding.personFab.visibility = View.GONE
@@ -46,6 +48,16 @@ class MainActivity : AppCompatActivity() {
                 binding.bottomNavigationView.visibility = View.VISIBLE
                 binding.bottomAppBar.visibility = View.VISIBLE
                 binding.personFab.visibility = View.VISIBLE
+            }*/
+
+            if(destination.id == R.id.homeFragment2){
+                binding.bottomNavigationView.visibility = View.VISIBLE
+                binding.bottomAppBar.visibility = View.VISIBLE
+                binding.personFab.visibility = View.VISIBLE
+            }else{
+                binding.bottomNavigationView.visibility = View.GONE
+                binding.bottomAppBar.visibility = View.GONE
+                binding.personFab.visibility = View.GONE
             }
 
         }
@@ -54,7 +66,12 @@ class MainActivity : AppCompatActivity() {
             navController.navigateUp()
             navController.navigate(R.id.profileFragment)
         }
+        val locale = Locale("ar")
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.setLocale(locale)
+        baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
 
-     
+
     }
 }
