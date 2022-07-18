@@ -34,17 +34,17 @@ class SplashscreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // if user has not logged gg to login
-    if(token == null){
+   // if(token == null){
         Handler(Looper.myLooper()!!).postDelayed({
             findNavController().navigate(SplashscreenFragmentDirections
                     .actionSplashscreenFragmentToLoginFragment())
          },1000)
 
-        }else{
-            // if he has logged go to home directly
-        findNavController().navigate(SplashscreenFragmentDirections
-                             .actionSplashscreenFragmentToHomeFragment2())
-    }
+       // }else{
+        // if he has logged go to home directly
+       //  findNavController().navigate(SplashscreenFragmentDirections
+       //                      .actionSplashscreenFragmentToHomeFragment2())
+     // }
 
     }
 

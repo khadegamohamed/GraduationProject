@@ -44,15 +44,23 @@ class SubjectsAdapter(private val subjectsList: List<SubjectResponse>) :
             itemView.setOnClickListener {
              // navigate to lectures of each subject if the user is a student,
                 // if he is doctor go to PdfFragment
-                val role = sharedPref.getUserRole()
-               val navController = Navigation.findNavController(itemView)
-               // if(role == "Student")
-                 navController.navigate(SubjectsFragmentDirections
-                     .actionNavigateToLecturesFragment(subjectResponse._id))
+               val role = sharedPref.getUserRole()
 
-               //else if (role == "Doctor")
-                  // navController.navigate(SubjectsFragmentDirections
-                   //                   .actionSubjectsFragmentToPdfFragment())
+
+               if(role == "Student"){
+                   Toast.makeText(itemView.context,role+"inside",Toast.LENGTH_SHORT).show()
+                   val navController = Navigation.findNavController(itemView)
+               navController.navigate(SubjectsFragmentDirections
+                    .actionNavigateToLecturesFragment(subjectResponse._id))
+               }
+
+               else if (role == "Doctor"){
+                   Toast.makeText(itemView.context,role,Toast.LENGTH_SHORT).show()
+                   val navController = Navigation.findNavController(itemView)
+                   navController.navigate(SubjectsFragmentDirections
+                       .actionSubjectsFragmentToPdfFragment())
+               }
+
 
             }
 

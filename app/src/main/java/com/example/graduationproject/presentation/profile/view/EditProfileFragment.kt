@@ -25,12 +25,14 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.graduationproject.databinding.FragmentEditProfileBinding
+import com.example.graduationproject.domain.common.RealPathUtil
 import com.example.graduationproject.domain.common.SharedPreferenceManager
 import com.example.graduationproject.presentation.profile.model.Profile
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.io.FileOutputStream
 import java.util.jar.Manifest
@@ -42,7 +44,7 @@ class EditProfileFragment : Fragment() {
     lateinit var profileViewModel: ProfileViewModel
     lateinit var sharedPref: SharedPreferenceManager
     lateinit var body: MultipartBody.Part
-    lateinit var imagePath: String
+     var imagePath: String? = null
     lateinit var id: String
     private var fileUri: Uri? = null
 
@@ -125,61 +127,31 @@ class EditProfileFragment : Fragment() {
             binding.profileIv.setImageURI(data?.data)
             fileUri = data?.data
 
-            val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-            val cursor = requireActivity().contentResolver.query(fileUri!!,
-                filePathColumn, null, null, null)
-            assert(cursor != null)
-            cursor!!.moveToFirst()
-
-            val columnIndex = cursor.getColumnIndex(filePathColumn[0])
-           var imagePath = cursor.getString(columnIndex)
-            cursor.close()
-
-
+        //   imagePath = RealPathUtil.getRealPath(this.requireContext(), fileUri!!)
+             imagePath = getRealPathFromUri(this.requireContext(),fileUri)
+             var file = File(imagePath)
             // convert uri image to file and send it to server
-            val file: File? = File(imagePath)
-            Log.d("test",data?.data.toString())
-                //uriToFile(this.requireContext(),fileUri!!,"temp_image")
-            val requestFile = RequestBody.create("image/*".toMediaTypeOrNull(), file!!)
-            body = MultipartBody.Part.createFormData("file", file.name, requestFile)
+            var requestFile = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+             body = MultipartBody.Part.createFormData("file", file.name, requestFile)
+
+            //body = getImageAsMultipartBodyPart(this.requireContext(), fileUri!!,"file")
+            Log.d("file",body.toString())
             updateProfileImage(id,body)
 
         }
     }
 
-    private fun createImageFile(fileName:String = "temp_image"): File{
-        val storageDir = requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return  File.createTempFile(fileName,".jpg",storageDir)
-    }
-
-    // we can't get image file path from uri,
-    // but we can create a temp file from uri
-    private fun uriToFile(context: Context,uri:Uri,fileName: String): File?{
-        context.contentResolver.openInputStream(uri)?.let { inputStream ->
-            val tempFile:File = createImageFile(fileName)
-            val outputStream = FileOutputStream(tempFile)
-
-            inputStream.copyTo(outputStream)
-            inputStream.close()
-            outputStream.close()
-
-            return  tempFile
-        }
-        return null
+    fun getImageAsMultipartBodyPart(context: Context?, uri: Uri,
+                                         name: String): MultipartBody.Part {
+        val path: String = RealPathUtil.getRealPath(this.requireContext(), uri)!!
+        val file = File(path)
+        Toast.makeText(context,file.toString(),Toast.LENGTH_SHORT).show()
+        val reqFileSelect = file.asRequestBody("image/*".toMediaTypeOrNull())
+        return MultipartBody.Part.createFormData(name, file.name, reqFileSelect)
     }
 
 
-    fun getPath(uri:Uri):String{
-       var projection : Array<String>
-                = arrayOf(MediaStore.MediaColumns.DATA)
-       var cursor: Cursor = this.requireActivity().managedQuery(uri,projection
-                                     ,null,null,null)
-     //  var columnIndex: Int =  cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
-       var columnIndex: Int =  cursor.getColumnIndexOrThrow(projection[0])
-        cursor.moveToFirst()
-        imagePath = cursor.getString(columnIndex)
-       return imagePath
-    }
+
 
     // send new name to the server
     private fun updateProfileName(id: String, profileName: Profile) {
@@ -190,8 +162,8 @@ class EditProfileFragment : Fragment() {
                     Toast.makeText(this.requireContext(),
                        "name updated successfully", Toast.LENGTH_SHORT).show()
                 } else {
-                   // Toast.makeText(this.requireContext(),
-                       // response.message(), Toast.LENGTH_SHORT).show()
+                 //  Toast.makeText(this.requireContext(),
+                   //     response.message(), Toast.LENGTH_SHORT).show()
                     Toast.makeText(this.requireContext(),
                         "Failed", Toast.LENGTH_SHORT).show()
                 }
@@ -204,9 +176,9 @@ class EditProfileFragment : Fragment() {
         profileViewModel.updateImageResponse.observe(viewLifecycleOwner,
             Observer { response ->
                 if (response.isSuccessful) {
-                    Toast.makeText(this.requireContext(),
-                        "image updated successfully", Toast.LENGTH_SHORT).show()
-                    Log.d("edit",response.body().toString())
+                    Toast.makeText(this.requireContext(), response.body()!!.message
+                                   , Toast.LENGTH_SHORT).show()
+
                 } else {
                     Toast.makeText(this.requireContext(),
                         response.message(), Toast.LENGTH_SHORT).show()
@@ -216,6 +188,24 @@ class EditProfileFragment : Fragment() {
             })
     }
 
+    fun getRealPathFromUri(context: Context, contentUri: Uri?): String? {
+        var cursor: Cursor? = null
+        return try {
+
+            val proj =
+                arrayOf(MediaStore.Images.Media.DATA)
+            cursor = context.getContentResolver()
+                .query(contentUri!!, proj, null, null, null)
+            val column_index: Int = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            cursor.moveToFirst()
+            cursor.getString(column_index)
+        } finally {
+            if (cursor != null) {
+                cursor.close()
+            }
+        }
+    }
+
   companion object{
       const val REQUEST_PICK_PHOTO = 1001
       const val PRequest = 1001
@@ -223,19 +213,5 @@ class EditProfileFragment : Fragment() {
   }
 
 
-//    override fun onResume() {
-//        super.onResume()
-//        binding.profileIv.setOnClickListener {
-//            if(Build.VERSION.SDK_INT >= 22){
-//                checkAndRequestForPermission()
-//            }else{
-//                launchGallery()
-//            }
-//
-//        }
-//
-//        var name = binding.profileNameEt.text.toString()
-//        updateProfileName(id, name)
-//
-//    }
+
 }

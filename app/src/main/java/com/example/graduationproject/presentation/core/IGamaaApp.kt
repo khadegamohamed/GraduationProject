@@ -10,3 +10,4 @@ class IGamaaApp(): Application() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
 }
+

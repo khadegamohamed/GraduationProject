@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.graduationproject.application.ProfileRepository
 import com.example.graduationproject.domain.model.ProfileResponse
+import com.example.graduationproject.domain.model.UploadLectureResponse
 import com.example.graduationproject.domain.networking.RetrofitBuilder
 import com.example.graduationproject.presentation.profile.model.Profile
 import kotlinx.coroutines.launch
@@ -17,7 +18,8 @@ class ProfileViewModel(context: Context):ViewModel() {
 
     var profileResponse: MutableLiveData<Response<ProfileResponse>> = MutableLiveData()
     var updateNameResponse:MutableLiveData<Response<ResponseBody>> = MutableLiveData()
-    var updateImageResponse:MutableLiveData<Response<ResponseBody>> = MutableLiveData()
+    var updateImageResponse:MutableLiveData<Response<UploadLectureResponse>> = MutableLiveData()
+
 
     var serviceInst = RetrofitBuilder.getAPIService(context)
     private val profileRepo = ProfileRepository(serviceInst)
@@ -40,4 +42,6 @@ class ProfileViewModel(context: Context):ViewModel() {
            updateImageResponse.value = result
        }
    }
+
+
 }

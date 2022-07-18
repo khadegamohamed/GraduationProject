@@ -3,12 +3,10 @@ package com.example.graduationproject.domain.networking
 import com.example.graduationproject.domain.model.*
 import com.example.graduationproject.presentation.auth.model.User
 import com.example.graduationproject.presentation.lectures.model.Comment
-import com.example.graduationproject.presentation.lectures.model.LectureModel
 import com.example.graduationproject.presentation.profile.model.Profile
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import retrofit2.Response
-import okhttp3.RequestBody
 import retrofit2.http.*
 
 
@@ -30,15 +28,22 @@ interface ServiceAPI {
     @PUT("profile/{id}/edit/photo")
     suspend fun updateProfileImage(
         @Path("id") id: String,
-        @Part file: MultipartBody.Part): Response<ResponseBody>
+        @Part file: MultipartBody.Part): Response<UploadLectureResponse>
+
+    // test
+    @Multipart
+    @POST("test")
+    suspend fun setImage(@Part file: MultipartBody.Part): Response<ResponseBody>
+
 
     @GET("AllSubjects")
     suspend fun getAllSubjects(): Response<List<SubjectResponse>>
 
 
     @Multipart
-    @POST("")
-    fun uploadPdfFile(@PartMap map: Map<String, RequestBody>): Response<ResponseBody>
+    @POST("subject/{id}/addLecture")
+   suspend fun uploadPdfFile(@Part file: MultipartBody.Part)
+                                  : Response<UploadLectureResponse>
 
     @GET("subject/{id}")
     suspend fun getLectures(@Path("id") id: String): Response<LectureResponse>

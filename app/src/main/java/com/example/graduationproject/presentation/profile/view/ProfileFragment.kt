@@ -45,6 +45,9 @@ class ProfileFragment : Fragment() {
                         binding.userRoleTV.text = result.role
                         // save user id
                         sharedPrefManager.saveUserId(result._id)
+                        //save role to sharedPreference
+                        sharedPrefManager.saveUserRole(result.role!!)
+                        // save Profile Name
                         sharedPrefManager.saveProfileName(result.profile_name)
 
                         if (result.profile_photo != null) {

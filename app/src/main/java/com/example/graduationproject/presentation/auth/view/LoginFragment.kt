@@ -56,8 +56,7 @@ class LoginFragment : Fragment() {
                         //save token to sharedPreference
                         sharedPrefManager.saveToken(tokenVal)
                        val userRole= response.body()!!.role
-                        //save role to sharedPreference
-                        sharedPrefManager.saveUserRole(userRole)
+
                         Log.i("Login", response.body().toString())
                     }
                        Toast.makeText(activity,
@@ -70,8 +69,8 @@ class LoginFragment : Fragment() {
 
             }
             // temp
-          // findNavController().navigate(LoginFragmentDirections
-           //     .actionLoginFragmentToHomeFragment2())
+//           findNavController().navigate(LoginFragmentDirections
+//                .actionLoginFragmentToHomeFragment2())
         }
 
     }

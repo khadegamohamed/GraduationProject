@@ -3,10 +3,12 @@ package com.example.graduationproject.presentation.lectures.view.uploadLectures
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.os.FileUtils
 import android.util.Log
 import android.view.*
 import android.widget.Toast
@@ -23,32 +25,41 @@ import com.nbsp.materialfilepicker.ui.FilePickerActivity
 import java.io.File
 import java.util.regex.Pattern
 import android.provider.OpenableColumns
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import com.example.graduationproject.domain.common.RealPathUtil
+import com.example.graduationproject.presentation.lectures.view.LecturesViewModel
 import com.shockwave.pdfium.PdfDocument
 import com.shockwave.pdfium.PdfDocument.Bookmark
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 
-
-
-class PdfFragment : Fragment(), OnPageChangeListener, OnLoadCompleteListener,
-    OnPageErrorListener {
+private const val TAG ="PdfFragment"
+class PdfFragment : Fragment() {
     lateinit var binding: FragmentPDFBinding
-    var pdfFileName: String? = null
+    lateinit var lecturesViewModel: LecturesViewModel
     lateinit var pdfView: PDFView
+     var pdfUri: Uri? =null
     lateinit var dialog: ProgressDialog
     lateinit var pdfPath: String
-    private var pageNumber = 0
+    lateinit var part: MultipartBody.Part
+
 
     companion object {
         const val FILE_PICKER_REQUEST_CODE = 1
     }
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?, ): View? {
-        binding = FragmentPDFBinding.inflate(layoutInflater, container, false)
-
-        pdfView = binding.pdfview
+        binding = FragmentPDFBinding.inflate(inflater, container, false)
+        lecturesViewModel = LecturesViewModel(this.requireContext())
 
         return binding.root
     }
@@ -56,150 +67,82 @@ class PdfFragment : Fragment(), OnPageChangeListener, OnLoadCompleteListener,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initDialog()
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.lecture_options, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.pickFile -> {
-                launchPicker()
-                return true
-            }
-            R.id.upload -> {
-                uploadFile()
-                return true
-            }
+        pdfView = binding.pdfview
+        binding.pdfFab.setOnClickListener {
+          pdfPickIntent()
         }
-        return super.onOptionsItemSelected(item)
+
+        binding.uploadFab.setOnClickListener {
+            uploadPdfToServer(part)
+        }
+
     }
 
-    //send it to the server
-    private fun uploadFile() {
-        TODO("Not yet implemented")
+    private fun pdfPickIntent() {
+        val intent = Intent()
+        intent.type = "application/pdf"
+        intent.action = Intent.ACTION_GET_CONTENT
+        pdfActivityResultLauncher.launch(intent)
     }
 
-    private fun launchPicker() = MaterialFilePicker()
-        .withActivity(this.activity)
-        .withRequestCode(FILE_PICKER_REQUEST_CODE)
-        .withHiddenFiles(true)
-        .withFilter(Pattern.compile(".*\\.pdf$"))
-        .withTitle("Select PDF file")
-        .start()
+    val pdfActivityResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult(),
+        ActivityResultCallback <ActivityResult>{ result ->
+            if(result.resultCode == RESULT_OK){
+              pdfUri = result.data!!.data
+                showPdfFromUri(pdfUri!!)
+                // get file as multi part
+             val file = File(pdfUri!!.path)
+                val requestBody = RequestBody.create("*/*".toMediaTypeOrNull(), file)
+                part = MultipartBody.Part.createFormData("file",file.name,requestBody)
+              Toast.makeText(this.requireContext()
+                          ," ${file} ",Toast.LENGTH_SHORT).show()
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == FILE_PICKER_REQUEST_CODE && resultCode == RESULT_OK) {
-            val path = data!!.getStringExtra(FilePickerActivity.RESULT_FILE_PATH)
-            val file = File(path)
-            displayFromFile(file)
-            if (path != null) {
-                Log.d("Path: ", path);
-                pdfPath = path;
-                Toast.makeText(this.requireContext(), "Picked file: $path",
-                    Toast.LENGTH_LONG).show()
+                Log.d(TAG, "File: ${part} ")
 
+
+            }
+            else{
+                Toast.makeText(this.requireContext(),
+                    "Cancelled", Toast.LENGTH_SHORT).show()
             }
 
         }
+    )
+
+    fun showPdfFromUri(uri: Uri){
+        pdfView.fromUri(pdfUri)
+            .defaultPage(0)
+            .spacing(10)
+            .load()
     }
 
-    private fun displayFromFile(file: File) {
-        val uri = Uri.fromFile(File(file.absolutePath))
-        pdfFileName = getFileName(uri)
-
-        pdfView.fromFile(file)
-            .defaultPage(pageNumber)
-            .onPageChange(this)
-            .enableAnnotationRendering(true)
-            .onLoad(this)
-            .scrollHandle(DefaultScrollHandle(this.requireContext()))
-            .spacing(10) // in dp
-            .onPageError(this)
-            .load();
-    }
-
-    @SuppressLint("Range")
-    private fun getFileName(uri: Uri?): String? {
-        var result: String? = null
-        if (uri!!.scheme.equals("content")) {
-            val cursor: Cursor? = activity?.applicationContext!!
-                .contentResolver.query(uri, null,
-                    null, null, null)
-            cursor.use { cursor ->
-                if (cursor != null && cursor.moveToFirst())
-                    result = cursor.getString(cursor
-                        .getColumnIndex(OpenableColumns.DISPLAY_NAME))
-            }
-        }
-        if (result == null) {
-            result = uri.lastPathSegment
-        }
-        return result
+    fun getFileAsMultipartBodyPart(context: Context?, uri: Uri,
+                                    name: String): MultipartBody.Part {
+        val path: String = RealPathUtil.getRealPath(this.requireContext(), uri)!!
+        val file = File(path)
+        Log.d(TAG, "getFileAsMultipartBodyPart: ${file}")
+        Toast.makeText(context,file.toString(),Toast.LENGTH_SHORT).show()
+        val reqFileSelect = file.asRequestBody("*/*".toMediaTypeOrNull())
+        return MultipartBody.Part.createFormData(name, file.name, reqFileSelect)
     }
 
 
+    private fun uploadPdfToServer(part: MultipartBody.Part) {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            lecturesViewModel.uploadLecture(part)
+            lecturesViewModel.uploadLecturesResponse
+                .observe(viewLifecycleOwner, Observer { response ->
+                    if(response.isSuccessful)
+                        Toast.makeText(requireContext(),
+                            response.body()!!.message,Toast.LENGTH_SHORT).show()
+                    else
+                        Toast.makeText(requireContext(),
+                            response.message(),Toast.LENGTH_SHORT).show()
 
-    override fun loadComplete(nbPages: Int) {
-        var mate = pdfView.documentMeta
-        printBookmarksTree(pdfView.tableOfContents, "-")
-
-    }
-
-    fun printBookmarksTree(tree: List<Bookmark>, sep: String) {
-        for (b in tree) {
-
-            if (b.hasChildren()) {
-                printBookmarksTree(b.children, "$sep-")
-            }
+                })
         }
     }
 
-    override fun onPageError(page: Int, t: Throwable?) {
-
-    }
-
-    override fun onPageChanged(page: Int, pageCount: Int) {
-        pageNumber = page;
-       //setTitle(String.format("%s %s / %s", pdfFileName, page + 1, pageCount));
-    }
-   private fun uploadPdfFile(){
-       if (pdfPath == null){
-           Toast.makeText(this.requireContext(),
-               "please select a pdf file ", Toast.LENGTH_LONG).show()
-       }else{
-           showDialog()
-
-           // Map is used to multipart the file using okhttp3.RequestBody
-           val map: MutableMap<String, RequestBody> = HashMap()
-           val file = File(pdfPath)
-
-           // Parsing any Media type file
-           val requestBody: RequestBody = RequestBody
-               .create("application/pdf".toMediaTypeOrNull(), file)
-               map["file\"; filename=\"" + file.name.toString() + "\""] = requestBody
-
-           // this map will send to the request fun
-
-
-       }
-   }
-
-
-    private fun initDialog() {
-        dialog = ProgressDialog(this.requireContext())
-        dialog.setMessage("Loading...")
-        dialog.setCancelable(true)
-    }
-
-     private fun showDialog() {
-        if (!dialog.isShowing) dialog.show()
-    }
-
-    private fun hideDialog() {
-        if (dialog.isShowing) dialog.dismiss()
-    }
 }
