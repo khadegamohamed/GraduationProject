@@ -49,9 +49,19 @@ class LoginFragment : Fragment() {
                        Log.d("Login", response.code().toString())
                        sharedPrafrence.saveToken(response.body()!!.token)
                     if(response.body()!!.isSuccessful) {
+
                         findNavController().navigate(
                             LoginFragmentDirections.actionLoginFragmentToHomeFragment2()
                         )
+
+                    if(response.body()!= null) {
+                       val tokenVal = response.body()!!.token
+                        //save token to sharedPreference
+                        sharedPrefManager.saveToken(tokenVal)
+                       val userRole= response.body()!!.role
+
+                        Log.i("Login", response.body().toString())
+
                     }
                        Toast.makeText(activity,
                            response.body()!!.massage,Toast.LENGTH_SHORT).show()
@@ -64,6 +74,11 @@ class LoginFragment : Fragment() {
 
             }
 
+
+            }
+            // temp
+//           findNavController().navigate(LoginFragmentDirections
+//                .actionLoginFragmentToHomeFragment2())
         }
 
     }

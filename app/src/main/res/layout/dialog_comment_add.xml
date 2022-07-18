@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-condensed"
-        android:text="Add Comment"
+        android:text="@string/add_comment"
         android:textAlignment="center"
         android:textSize="@dimen/_16ssp"
         android:textStyle="bold"
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/backBtn"
-        android:hint="Comment"
+        android:hint="@string/comment"
         app:startIconDrawable="@drawable/ic_baseline_message_24">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -40,16 +40,18 @@
             android:inputType="textMultiLine|textCapSentences"/>
 
     </com.google.android.material.textfield.TextInputLayout>
+
     <Button
+        android:id="@+id/submitBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/commentTitle"
-        android:text="Submit"
-        android:textSize="@dimen/_14ssp"
-        android:textAllCaps="false"
-        android:background="@drawable/button_shape"
-        app:backgroundTint="@color/dark_green"
         android:layout_marginTop="@dimen/_20sdp"
-        android:textColor="@color/white"/>
+        android:background="@drawable/button_shape"
+        android:text="@string/submit"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14ssp"
+        app:backgroundTint="@color/dark_green" />
 
 </RelativeLayout>

@@ -9,22 +9,20 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.graduationproject.R
+import com.example.graduationproject.domain.model.LectureCommentResponseItem
 import com.example.graduationproject.presentation.lectures.model.LectureCommentModel
 import java.lang.Exception
 import java.text.SimpleDateFormat
 
 class LectureCommentsAdapter( private val context: Context,
-    private val comments:List<LectureCommentModel>):
+    private val comments:List<LectureCommentResponseItem>):
     RecyclerView.Adapter<LectureCommentsAdapter.HolderComment>() {
 
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderComment =
         HolderComment(LayoutInflater.from(parent.context)
-            .inflate(
-                R.layout.list_item_lecture_comment,
-                parent,false)
-               )
+            .inflate(R.layout.list_item_lecture_comment, parent,false))
 
     override fun onBindViewHolder(holder: HolderComment, position: Int) {
       holder.bind(comments[position])
@@ -35,21 +33,21 @@ class LectureCommentsAdapter( private val context: Context,
     inner class HolderComment(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         var profileIV : ImageView = itemView.findViewById(R.id.profileIV)
-        var nameTV: TextView = itemView.findViewById(R.id.nameTV)
+        var nameTV: TextView = itemView.findViewById(R.id.UsernameTV)
         var dateTV: TextView = itemView.findViewById(R.id.dateTV)
         var commentTV: TextView = itemView.findViewById(R.id.commentTV)
 
-        fun bind(commentModel: LectureCommentModel) {
-          val id = commentModel.id
+        fun bind(commentModel: LectureCommentResponseItem) {
+          val id = commentModel._id
 
-            val published = commentModel.published
-            val profileIV = commentModel.profileImage
+            val published = commentModel.time
+            val profileIV = commentModel.profile_photo
 
 
           // set data to views
-            nameTV.text = commentModel.name
+            nameTV.text = commentModel.profile_name
             dateTV.text = formatDate(published)
-            commentTV.text =commentModel.comment
+            commentTV.text =commentModel.caption
 
             try {
                 Glide.with(context)
@@ -61,9 +59,7 @@ class LectureCommentsAdapter( private val context: Context,
              e.printStackTrace()
             }
 
-
         }
-
 
     }
 

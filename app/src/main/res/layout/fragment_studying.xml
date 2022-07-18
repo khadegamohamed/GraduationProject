@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="@dimen/_12sdp"
-            android:text="First Term"
+            android:text="@string/first_term"
             android:textColor="@color/white"
             android:textSize="@dimen/_21sdp" />
     </androidx.cardview.widget.CardView>
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="@dimen/_12sdp"
-            android:text="Second Term"
+            android:text="@string/second_term"
             android:textColor="@color/white"
             android:textSize="@dimen/_21sdp" />
     </androidx.cardview.widget.CardView>

@@ -30,8 +30,7 @@ val dummyFirstTermSubjects = listOf(
 val file1 = File("src/main/assets/2-Intelligent_Agents.pdf")
 val file2 = File("src/main/assets/Chapter1_SW.pdf")
     val dummyLectures = mutableListOf(
-        LectureModel(0, "2-Intelligent_Agents.pdf",file1),
-        LectureModel(1, "Chapter1_SW.pdf", file2),
-
+        LectureModel("0", "2-Intelligent_Agents.pdf",file1),
+        LectureModel("1", "Chapter1_SW.pdf", file2),
     )
 

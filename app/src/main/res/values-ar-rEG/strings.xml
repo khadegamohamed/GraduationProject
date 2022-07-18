@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GraduationProject</string>
+    <string name="user_name">اسم المستخدم</string>
+    <string name="user_code">كود المستخدم</string>
+    <string name="second_term_subjects">مواد الترم الثانى</string>
+    <string name="brightness">الاضاءة</string>
+    <string name="on">تفعيل</string>
+    <string name="english">اللغة الانجليزية</string>
+    <string name="about_app">عن التطبيق</string>
+    <string name="log_out">تسجيل خروج</string>
+    <string name="add_comment">اضافة تعليق</string>
+    <string name="comment">تعليق</string>
+    <string name="submit">اضافة</string>
+    <string name="edit_profile">تعديل الصفحة الشخصية</string>
+    <string name="profile_name">اسم الصفحة الشخصية</string>
+    <string name="update">تعديل</string>
+    <string name="lecture_comments">كومنتات المحاضرة</string>
+    <string name="login">تسجيل دخول</string>
+    <string name="mera_martin">ميرا مارتن</string>
+    <string name="user_name1">اسم المستخدم</string>
+    <string name="user_role">صفة المستخدم</string>
+    <string name="edit_profile1">تعديل البروفايل</string>
+    <string name="first_term">مواد الترم الأول</string>
+    <string name="second_term">مواد الترم الثانى</string>
+    <string name="lecture_name">اسم المحاضرة</string>
+    <string name="name">الاسم</string>
+    <string name="the_comment">الكومنت</string>
+    <string name="dd_mm_yyyy">التاريخ</string>
+    <string name="subject_name">اسم المادة</string>
+</resources>

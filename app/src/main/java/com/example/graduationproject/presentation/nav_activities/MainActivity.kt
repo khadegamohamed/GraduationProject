@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.graduationproject.R
 import com.example.graduationproject.databinding.ActivityMainBinding
 import com.example.graduationproject.presentation.profile.view.ProfileFragment
+import com.example.graduationproject.presentation.settings.SettingsFragment
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -29,9 +30,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-            navController = navHostFragment.navController
+               navController = navHostFragment.navController
 
         bottomNavigation = binding.bottomNavigationView
         bottomNavigation.setupWithNavController(navController)
@@ -39,16 +41,8 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.menu.getItem(2).isEnabled = false
 
         NavigationUI.setupWithNavController(bottomNavigation, navController)
+
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-          /*  if (destination.id == R.id.loginFragment || destination.id == R.id.splashscreenFragment) {
-                binding.bottomNavigationView.visibility = View.GONE
-                binding.bottomAppBar.visibility = View.GONE
-                binding.personFab.visibility = View.GONE
-            } else {
-                binding.bottomNavigationView.visibility = View.VISIBLE
-                binding.bottomAppBar.visibility = View.VISIBLE
-                binding.personFab.visibility = View.VISIBLE
-            }*/
 
             if(destination.id == R.id.homeFragment2){
                 binding.bottomNavigationView.visibility = View.VISIBLE
@@ -71,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         val config = Configuration()
         config.setLocale(locale)
         baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+
 
 
     }

@@ -5,16 +5,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.NavAction
+import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 //import com.example.graduationproject.Navgraph2Directions
 import com.example.graduationproject.R
-import com.example.graduationproject.presentation.subjects.model.SubjectModel
+import com.example.graduationproject.domain.common.SharedPreferenceManager
+import com.example.graduationproject.domain.model.SubjectResponse
 
 
-class SubjectsAdapter(private val subjectsList: List<SubjectModel>) :
+class SubjectsAdapter(private val subjectsList: List<SubjectResponse>) :
     RecyclerView.Adapter<SubjectsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -31,23 +32,35 @@ class SubjectsAdapter(private val subjectsList: List<SubjectModel>) :
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+        var sharedPref = SharedPreferenceManager(itemView.context)
         var subjectName: TextView = itemView.findViewById(R.id.subject_name)
-        var subjectImage: ImageView = itemView.findViewById(R.id.subject_image)
 
 
-        fun bind(subjectModel: SubjectModel) {
-            subjectName.text = subjectModel.subjectName
+        fun bind(subjectResponse: SubjectResponse) {
+            subjectName.text = subjectResponse.subject_name
 
-            Glide.with(itemView)
-                .load(subjectModel.imageUrl)
-                .centerCrop()
-                .into(subjectImage)
+
 
             itemView.setOnClickListener {
-             // navigate to lectures of each subject
-               val navController = Navigation.findNavController(itemView)
-             navController.navigate(SubjectsFragmentDirections.actionSubjectsFragmentToLecturesFragment(subjectModel.id))
+                // navigate to lectures of each subject if the user is a student,
+                // if he is doctor go to PdfFragment
+                val role = sharedPref.getUserRole()
+
+
+                if(role == "Student"){
+                    Toast.makeText(itemView.context,role+"inside",Toast.LENGTH_SHORT).show()
+                    val navController = Navigation.findNavController(itemView)
+                    navController.navigate(SubjectsFragmentDirections
+                        .actionNavigateToLecturesFragment(subjectResponse._id))
+                }
+
+                else if (role == "Doctor"){
+                    Toast.makeText(itemView.context,role,Toast.LENGTH_SHORT).show()
+                    val navController = Navigation.findNavController(itemView)
+                    navController.navigate(SubjectsFragmentDirections
+                        .actionSubjectsFragmentToPdfFragment())
+                }
+
 
             }
 

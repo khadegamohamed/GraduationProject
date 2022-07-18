@@ -110,7 +110,7 @@
         android:background="@drawable/login_btn_background"
         android:drawableEnd="@drawable/ic_arrow_circle_right_24"
         android:paddingEnd="@dimen/_15sdp"
-        android:text="LogIn"
+        android:text="@string/login"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="@dimen/_26sdp"

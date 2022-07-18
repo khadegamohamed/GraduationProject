@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.profile.view.EditProfileFragment">
+
+   <RelativeLayout
+       android:id="@+id/toolbarRl"
+       android:layout_width="match_parent"
+       android:layout_height="@dimen/_200sdp"
+       android:background="@drawable/back_shape">
+
+      <ImageButton
+          android:id="@+id/backBtn"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="10dp"
+          android:layout_marginStart="@dimen/_10sdp"
+          android:backgroundTint="@color/transparent"
+          android:src="@drawable/ic_white_arrow_back" />
+
+      <TextView
+          android:id="@+id/toolbarTitleTv"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="@dimen/_10sdp"
+          android:text="@string/edit_profile"
+          android:textColor="@color/white"
+          android:textSize="@dimen/_18ssp"
+          android:textStyle="bold" />
+
+      <com.mikhaellopez.circularimageview.CircularImageView
+          android:id="@+id/profileIv"
+          android:layout_width="@dimen/_100sdp"
+          android:layout_height="@dimen/_100sdp"
+          android:layout_below="@id/toolbarTitleTv"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="40dp"
+          android:src="@drawable/ic_person_24" />
+
+
+   </RelativeLayout>
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="@dimen/_30sdp"
+       android:layout_marginTop="@dimen/_180sdp"
+       android:layout_marginEnd="@dimen/_30sdp">
+      <com.google.android.material.textfield.TextInputLayout
+          android:id="@+id/profileNameLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+          <EditText
+              android:id="@+id/profileNameEt"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:drawableStart="@drawable/ic_person_24"
+              android:drawablePadding="10dp"
+              android:inputType="textPersonName|textCapWords"
+              android:textColor="@color/dark_green"
+              android:textColorHint="@color/orange"
+              android:hint="@string/profile_name"
+              android:background="@color/white"/>
+      </com.google.android.material.textfield.TextInputLayout>
+
+      <Button
+          android:id="@+id/updateBtn"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/profileNameLayout"
+          android:layout_marginTop="@dimen/_40sdp"
+          android:background="@drawable/button_shape_orange"
+          android:text="@string/update"
+          android:textAllCaps="false"
+          android:textColor="@color/white"
+          android:textSize="21sp" />
+   </RelativeLayout>
+
+</RelativeLayout>

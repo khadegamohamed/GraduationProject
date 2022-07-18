@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingEnd="@dimen/_40sdp"
+    android:paddingTop="@dimen/_40sdp"
+    android:paddingBottom="@dimen/_40sdp"
+    android:paddingStart="@dimen/_12sdp"
+    android:orientation="vertical"
+    android:background="@drawable/setting_back">
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:drawableStart="@drawable/ic_baseline_info_24"
+       android:layout_margin="@dimen/_12sdp"
+       android:text="About App"
+       android:drawablePadding="@dimen/_12sdp"
+       android:textColor="@color/darkgreen"
+       android:textSize="@dimen/_16ssp"
+       android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/infoShowTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_12sdp"
+        android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        android:textSize="@dimen/_14ssp"
+        android:inputType="textMultiLine"
+        android:textColor="@color/darkgreen"/>
+
+
+</LinearLayout>

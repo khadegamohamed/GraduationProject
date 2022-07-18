@@ -1,4 +1,3 @@
 package com.example.graduationproject.presentation.profile.model
 
-class Profile {
-}
+data class Profile (val profile_name: String)

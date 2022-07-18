@@ -2,33 +2,23 @@ package com.example.graduationproject.application
 
 import com.example.graduationproject.domain.dummyFirstTermSubjects
 import com.example.graduationproject.domain.dummySecondTermSubjects
+import com.example.graduationproject.domain.model.SubjectResponse
+import com.example.graduationproject.domain.networking.ServiceAPI
 import com.example.graduationproject.presentation.subjects.model.SubjectModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
+import retrofit2.Response
 
-class SubjectsRepository {
-
-    fun getFirstTermSubjectList() = flow{
-        emit(dummyFirstTermSubjects)
-    }
-   fun getFirstTermSubjects() = dummyFirstTermSubjects
-
-    fun getSecondTermSubjectList() = flow{
-        emit(dummySecondTermSubjects)
-    }
+class SubjectsRepository(private val api: ServiceAPI) {
 
 
-   /** suspend fun getFirstTermSubjects =
-        withContext(Dispatchers.IO){
-            api.getFierstTermSubjects()
+    suspend fun getAllSubjectList()=
+        withContext(Dispatchers.IO) {
+            api.getAllSubjects()
         }
 
-   suspend fun getSecondTermSubjects =
-   withContext(Dispatchers.IO){
-   api.getSecondTermSubjects()
-      }
-   */
+
 
 
 }
