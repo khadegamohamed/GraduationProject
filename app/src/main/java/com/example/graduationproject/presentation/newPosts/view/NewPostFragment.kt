@@ -87,20 +87,7 @@ class NewPostFragment:Fragment() {
         binding.cancelPost.setOnClickListener {
             findNavController().navigate(NewPostFragmentDirections.actionNewPostFragmentToHomeFragment2())
         }
-        var arl = registerForActivityResult(
-            ActivityResultContracts.GetContent()
-        ) { result ->
-            theImage = result
-            Glide.with(view)
-                .load(result)
-                .into(binding.ImagePost)
-        }
 
-        binding.addPhotoAndVideo.setOnClickListener {
-            Toast.makeText(requireContext(),"The maximum Number Of Photos is one",Toast.LENGTH_LONG).show()
-            Toast.makeText(requireContext(),"Be careful images can not be edit after added",Toast.LENGTH_LONG).show()
-            arl.launch("image/*")
-        }
 
 
 
@@ -111,3 +98,18 @@ class NewPostFragment:Fragment() {
 
 
 }
+
+/*var arl = registerForActivityResult(
+    ActivityResultContracts.GetContent()
+) { result ->
+    theImage = result
+    Glide.with(view)
+        .load(result)
+        .into(binding.ImagePost)
+}
+
+binding.addPhotoAndVideo.setOnClickListener {
+    Toast.makeText(requireContext(),"The maximum Number Of Photos is one",Toast.LENGTH_LONG).show()
+    Toast.makeText(requireContext(),"Be careful images can not be edit after added",Toast.LENGTH_LONG).show()
+    arl.launch("image/*")
+}*/

@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.graduationproject.application.LectureCommentRepository
 import com.example.graduationproject.domain.model.LectureCommentResponseItem
 import com.example.graduationproject.domain.networking.RetrofitBuilder
-import com.example.graduationproject.presentation.lectures.model.Comment
+import com.example.graduationproject.presentation.lectures.model.LectureComment
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -19,7 +19,7 @@ class LectureCommentsViewModel(context: Context): ViewModel() {
      var lectureAllCommentsResponse: MutableLiveData<Response<List<LectureCommentResponseItem>>>
                                                        = MutableLiveData()
 
-    suspend fun addComment(id:String,comment: Comment){
+    suspend fun addComment(id:String,comment: LectureComment){
         viewModelScope.launch {
             val result = lectureCommentRepo.addComment(id, comment)
             lectureCommentResponse.value = result

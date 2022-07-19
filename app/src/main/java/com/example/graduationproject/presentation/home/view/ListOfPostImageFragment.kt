@@ -29,7 +29,7 @@ private  lateinit var binding:FragmentlistofpostimagesBinding
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var theImage = ListOfPostImageFragmentArgs.fromBundle(requireArguments()).image
+        var theImage = ListOfPostImageFragmentArgs.fromBundle(requireArguments()).Image
         Glide.with(view)
             .load(theImage)
             .into(binding.TheImageInPost)

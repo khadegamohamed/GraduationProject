@@ -9,7 +9,7 @@ import com.example.graduationproject.presentation.home.model.*
 import com.example.graduationproject.presentation.newPosts.model.RequestEditPost
 import com.example.graduationproject.presentation.newPosts.model.RequestNewPost
 
-import com.example.graduationproject.presentation.lectures.model.Comment
+import com.example.graduationproject.presentation.lectures.model.LectureComment
 import com.example.graduationproject.presentation.profile.model.Profile
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
@@ -92,7 +92,7 @@ interface ServiceAPI {
     @POST("lecture/{id}/addComment")
     suspend fun addLectureComment(
         @Path("id") id: String,
-        @Body comment: Comment
+        @Body comment: LectureComment
     ): Response<ResponseBody>
 
     @GET("lecture/{id}/allComments")

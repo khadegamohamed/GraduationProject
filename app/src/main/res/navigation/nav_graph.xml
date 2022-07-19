@@ -195,15 +195,15 @@
         android:name="com.example.graduationproject.presentation.home.view.CommentsFragment"
         android:label="CommentsFragment" >
         <argument
-            android:name="ListOfComments"
+            android:name="listOfComments"
             app:argType="com.example.graduationproject.presentation.home.model.ListOfComments"
-
             />
         <action
             android:id="@+id/action_commentsFragment_to_homeFragment2"
             app:destination="@id/homeFragment2" />
 
     </fragment>
+
     <fragment
         android:id="@+id/editPostFragment"
         android:name="com.example.graduationproject.presentation.newPosts.view.EditPostFragment"

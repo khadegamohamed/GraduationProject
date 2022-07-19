@@ -16,7 +16,7 @@ import com.example.graduationproject.R
 import com.example.graduationproject.databinding.DialogCommentAddBinding
 import com.example.graduationproject.databinding.FragmentLectureCommentsBinding
 import com.example.graduationproject.presentation.lectures.adapters.LectureCommentsAdapter
-import com.example.graduationproject.presentation.lectures.model.Comment
+import com.example.graduationproject.presentation.lectures.model.LectureComment
 
 class LectureCommentsFragment : Fragment() {
     lateinit var binding: FragmentLectureCommentsBinding
@@ -111,7 +111,7 @@ class LectureCommentsFragment : Fragment() {
             // check if comment is taken already
             Toast.makeText(requireContext(),comment,Toast.LENGTH_SHORT).show()
             // send new comment
-            var myComment = Comment(comment)
+            var myComment = LectureComment(comment)
             lectureCommentViewModel.addComment(lectureId,myComment)
             lectureCommentViewModel.lectureCommentResponse.observe(viewLifecycleOwner
                 , Observer { result ->

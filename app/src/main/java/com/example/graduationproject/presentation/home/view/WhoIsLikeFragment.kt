@@ -25,7 +25,7 @@ class WhoIsLike:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var recyclerOfImage=binding.listOfLikes
-        var listOfLikes= WhoIsLikeArgs.fromBundle(requireArguments()).listOfLikes
+        var listOfLikes= WhoIsLikeArgs.fromBundle(requireArguments()).ListOfLikes
         var list:List<Like> = listOfLikes.listOfLikes
         var likesAdepter =LikesAdepter(list,requireContext())
         val lm: RecyclerView.LayoutManager = LinearLayoutManager(requireContext())

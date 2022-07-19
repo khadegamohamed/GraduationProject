@@ -57,7 +57,7 @@ class LoginFragment : Fragment() {
                     if(response.body()!= null) {
                        val tokenVal = response.body()!!.token
                         //save token to sharedPreference
-                        sharedPrefManager.saveToken(tokenVal)
+                        sharedPrafrence.saveToken(tokenVal)
                        val userRole= response.body()!!.role
 
                         Log.i("Login", response.body().toString())
@@ -69,11 +69,11 @@ class LoginFragment : Fragment() {
                        Log.i("Login", response.message().toString())
                    }
 
-                })
+                }
 
 
             }
-
+                )
 
             }
             // temp
